@@ -21,6 +21,7 @@ discretized in a grid with finite differences as
 \end{align*}
 --> 
 ![img](http://quicklatex.com/cache3/2d/ql_59f49ed64dbbe76704e0679b8ad7c22d_l3.png)
+
 where ∆x and ∆y are the grid spacing of the temperature grid *u*.
 
 Given an initial condition (u(t=0) = u0) one can follow the time dependence of
