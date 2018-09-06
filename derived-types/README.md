@@ -13,8 +13,8 @@ Define the real-valued variables into double precision, using the
 
 b) Let us extend the module started by adding the initialization
 of the two-dimensional array (item a) in
-[control-structures](control-structures)) and finite-difference Laplacian (in
-[loops-array](loops-array)) into their own functions, which now take the type 
+[control-structures](../control-structures)) and finite-difference Laplacian (in
+[loops-array](../loops-arrays)) into their own functions, which now take the type 
 representing the temperature field as an input.
 
 
