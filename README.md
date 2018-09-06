@@ -13,7 +13,7 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Control structures](control-structures)
 
 ### Procedures and modules
- - [Functions, subroutines and modules](procedurs)
+ - [Functions, subroutines and modules](procedures)
 
 ### Fortran arrays
  - [Loops, arrays, and array syntax](loops-arrays)
