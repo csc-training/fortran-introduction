@@ -11,18 +11,25 @@ program cmdargs
 
   ! Read in the command line arguments and
   ! set up the needed variables
-  ! TODO: get the argument count and process the arguments
-  select case(0)
+  select case(command_argument_count())
   case(0) ! No arguments -> default values
      write(*,'(A)') 'No command line arguments!'
      stop
   case(1) ! One argument -> input file name
-     stop
+     call get_command_argument(1, input_file)
   case(2) ! Two arguments -> input file name and number of steps
-     stop
+     call get_command_argument(1, input_file)
+     call get_command_argument(2, arg)
+     read(arg, *) nsteps
   case(3) ! Three arguments -> rows, cols and nsteps
-     stop
+     call get_command_argument(1, arg)
+     read(arg, *) rows
+     call get_command_argument(2, arg)
+     read(arg, *) cols
+     call get_command_argument(3, arg)
+     read(arg, *) nsteps
   case default
+     write(*,'(A)') 'More than three command line arguments.'
      stop
   end select
 
