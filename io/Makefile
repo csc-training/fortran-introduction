@@ -2,31 +2,20 @@ ifeq ($(COMP),)
 COMP=gnu
 endif
 
-COMMONDIR=../../../../heat/common
-LIBPNGDIR=/appl/opt/libpng
-
-ifeq ($(COMP),cray)
-FC=ftn
-CC=cc
-FCFLAGS=-O3 
-CCFLAGS=-O3 -I$(LIBPNGDIR)/include -I$(COMMONDIR)
-LDFLAGS=-L$(LIBPNGDIR)/lib
-LIBS=-lpng -lz
-endif
+COMMONDIR=./
 
 ifeq ($(COMP),gnu)
 FC=gfortran
 CC=gcc
 FCFLAGS=-O3 -Wall 
-CCFLAGS=-O3 -Wall -I$(LIBPNGDIR)/include -I$(COMMONDIR)
-LDFLAGS=-L$(LIBPNGDIR)/lib
+CCFLAGS=-O3 -Wall -I$(COMMONDIR)
+LDFLAGS=
 LIBS=-lpng -lz
 endif
 
 EXE=io
 OBJS=main.o io.o pngwriter_mod.o
 OBJS_PNG=$(COMMONDIR)/pngwriter.o
-
 
 all: $(EXE)
 
