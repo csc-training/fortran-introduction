@@ -18,6 +18,7 @@ lang:   en
 - Control structures
     - Branches
     - Loops
+- Procedures
 
 # Fortran as a language {.section}
 
@@ -47,7 +48,9 @@ lang:   en
 - Fortran 2003 (2004): a major revision, adding e.g. object-oriented
   features, C-bindings
     - ”Fortran 95/2003” is the current *de facto* standard
-
+- Fortran 2008: a minor revision, adding clarifications and
+  corrections to 2003
+    - Parallel computing using coarrays
 - The latest standard is Fortran 2018: a minor revision
     - Fortran coarray improvements
     - C interoperability improvements

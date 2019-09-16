@@ -10,6 +10,23 @@
     - Stream I/O
 - Internal I/O
 
+# Introduction
+
+- The long history of Fortran is clearly visible in IO routines
+- Some concepts are unique and different from any other language
+- Despite the peculiarities Fortran has powerful IO capabilities
+
+# Write statement
+
+- Simple form of write statement is
+```fortran
+write(*,*) item1, item2, item3, ...
+```
+- Here the items are the variables whose values are to be written and
+  the two asterisks denote the *unit* and *formatting*
+      - Default unit is the terminal (stdout)
+      - Default formatting depends on the compiler
+
 # Input/Output formatting
 
 - To prettify output and to make it human readable, use format

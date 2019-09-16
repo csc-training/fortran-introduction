@@ -58,11 +58,12 @@ write(*,*) proton % charge
   visible to that unit only
 - When declared in a module unit, a derived data type can be accessed
   and used outside the module through **use** statement
+<!--
 - Visibility can be controlled in more detailed level using
   **private** attribute
     - For example, it is possible to limit the access to part of the
       fields only to the module procedures in the same module where
-      the type is defined
+      the type is defined -->
 
 # Derived type initialization
 

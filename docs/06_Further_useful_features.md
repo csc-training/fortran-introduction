@@ -3,6 +3,7 @@
 # Outline
 
 - Generic procedures
+- Procedure pointers
 - Environment variables
 - Executing commands
 
@@ -134,6 +135,108 @@ end program switch
 
 </div>
 
+# Procedure pointers{.section}
+
+# Procedures as arguments
+
+<div class="column">
+
+```fortran
+module test
+contains
+  function apply(f, x) result(y)
+    procedure(add_one) :: f
+    integer, intent(in) :: x
+    integer :: y
+    y = f(x)
+  end function apply
+  function add_one(x) result(y)
+    integer, intent(in) :: x
+    integer :: y
+    y = x + 1
+  end function add_one
+end module test
+```
+
+</div>
+<div class="column">
+
+- It is possible to pass procedures as arguments
+    - Somewhat similar to C function pointer
+- Here **`add_one`** is passed as argument
+    - Interface of the procedure is known because implementation of
+      function is known to compiler
+
+</div>
+
+# Procedure interfaces
+
+<div class="column">
+
+```fortran
+module test
+  interface
+     fuction int_fun(x) result(y)
+     integer, intent(in) :: x
+     integer :: y
+  end interface
+contains
+  function apply(f, x) result(y)
+    procedure(int_fun) :: f
+    integer, intent(in) :: x
+    integer :: y
+    y = f(x)
+  end function apply
+end module test
+```
+
+</div>
+
+<div class="column">
+
+- Instead of explicit module function one can also provide an
+  **`interface`** as type for **`f`** in **`apply`** function
+- Fortran has also **`abstract`** interfaces
+    - Routines defined in abstract interface must now have an actual
+      implementation in the current scope
+
+</div>
+
+# Procedure pointers
+
+<div class="column">
+
+```fortran
+procedure(int_fun), pointer :: fptr
+
+fptr => add_one
+print *, fptr(1)
+fptr => substract_one
+print *, fptr(1)
+```
+
+```fortran
+function substract_one(x) result(y)
+  integer, intent(in) :: x
+  integer :: y
+  y = x - 1
+end function substract_one
+function add_one(x) result(y)
+  integer, intent(in) :: x
+  integer :: y
+  y = x + 1
+end function add_one
+```
+
+</div>
+
+<div class="column">
+
+- With **`procedure`** statement one can define also pointers to
+  procedures (explicit or implicit interfaces)
+- A user-defined type can also have procedure pointers as components
+
+</div>
 
 # Environment variables
 
@@ -204,9 +307,9 @@ end program execcommand
     - Can improve code readability
 - Operator overloading
     - Can use operators for user-defined types
+- Procedure pointers
 - Reading environment variables
 - Executing system commands
-
 
 <!--  LocalWords:  Fortran inout API
  -->

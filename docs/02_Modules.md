@@ -114,17 +114,17 @@ gfortran -o myexe mymod.o myprog.o
 
 <div class="column">
 Function definition in module
-```{.fortran emphasize=5:3-5:10,6:10-6:22}
+```{.fortran emphasize=5:1-5:8,6:8-6:20}
 module geometry
   implicit none
   real, parameter :: pi = 3.14
 
-  contains
-    real function dist(x, y)
-      implicit none
-      real :: x, y
-      dist = sqrt(x**2 + y**2)
-    end function dist
+contains
+  real function dist(x, y)
+    implicit none
+    real :: x, y
+    dist = sqrt(x**2 + y**2)
+  end function dist
 
 end module geometry
 ```
@@ -150,17 +150,17 @@ end program testprog
 
 <div class="column">
 Subroutine definition in module
-```{.fortran emphasize=5:3-5:10,6:5-6:19}
+```{.fortran emphasize=5:1-5:8,6:3-6:17}
 module geometry
   implicit none
   real, parameter :: pi = 3.14
 
-  contains
-    subroutine dist(x, y, d)
-      implicit none
-      real :: x, y, d
-      d = sqrt(x**2 + y**2)
-    end subroutine dist
+contains
+  subroutine dist(x, y, d)
+    implicit none
+    real :: x, y, d
+    d = sqrt(x**2 + y**2)
+  end subroutine dist
 
 end module geometry
 ```

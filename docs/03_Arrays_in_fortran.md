@@ -100,6 +100,8 @@ lhs(1:3, 0:9) = rhs(-2:0, 20:29) ! this is ok
 lhs(1:2, 0:9) = rhs(-2:0, 20:29)
 ```
 
+# Dynamic memory allocation{.section}
+
 # Dynamic memory allocation
 
 - Memory allocation is *static* if the array dimensions have been
