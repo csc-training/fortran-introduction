@@ -219,6 +219,32 @@ program placetest
 end program placetest
 ```
 
+# Select case
+
+<div class=column>
+- `select case` statement allows a variable to be tested for equality
+against a list of values
+    - Only one match is allowed
+    - Usually arguments are character strings or integers
+	- each `case` block can contain multiple statements
+    - `default` branch if no match found
+</div>
+<div class=column>
+```fortran
+integer :: i; logical :: is_prime, & 
+                         test_prime_number
+! ...
+select case (i)
+  case (2,3,5,7)
+    is_prime = .true.
+  case (1,4,6,8:10)
+    is_prime = .false.
+  case default
+    is_prime=test_prime_number(i)
+end select
+```
+</div>
+
 # Loops
 
 - Three loop formats available in Fortran
@@ -276,7 +302,25 @@ end do
  end do
 ```
 
-# Labels example
+# Construct names
+
+
+- TODO: better code examples
+- All the control structures can be given names
+with the general syntax:
+
+```fortran
+name: construct
+...
+    end construct name
+```
+- `construct` is `if`, `do`, or `select`
+- Construct names can make long or nested `if` and `select` blocks
+  more readable
+- `cycle` and `exit` can refer to name
+    - Possible to e.g. cycle back to outer loop from inner loop
+
+# Construct names: example
 
 ```fortran
 program gcd
@@ -288,9 +332,9 @@ program gcd
   write(*,*)’m:’, m,’ n:’, n
 positive_check: if (m > 0 .and. n > 0) then
 main_algorithm: do while (n /= 0)             ! positive check and main_algorithm
-      t = mod(m,n)                            ! are LABELS, that can be given to
-      m = n                                   ! control structures and used with
-      n = t                                   ! e.g. cycle and loop 
+      t = mod(m,n)                            ! are the construct names
+      m = n
+      n = t
     end do main_algorithm
     write(*,*) ’greatest common divisor: ’, m
   else
@@ -299,25 +343,16 @@ main_algorithm: do while (n /= 0)             ! positive check and main_algorith
 end program gcd
 ```
 
-# Select case
-
-- `select case` statements matches the entries of a list against the
-  case index
-    - Only one found match is allowed
-    - Usually arguments are character strings or integers
-    - `default` branch if no match found
+# Construct names: example 2
 
 ```fortran
-integer :: i; logical :: is_prime, test_prime_number
-! ...
-select case (i)
-  case (2,3,5,7)
-    is_prime = .true.
-  case (1,4,6,8:10)
-    is_prime = .false.
-  case default
-    is_prime=test_prime_number(i)
-end select
+...
+outer: do i=1, 100
+    inner: do j=1, 100
+	          ...
+	          if (cond) cycle outer
+		   end do inner
+	   end do outer
 ```
 
 # Procedures
