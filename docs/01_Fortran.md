@@ -304,56 +304,67 @@ end do
 
 # Construct names
 
-
-- TODO: better code examples
-- All the control structures can be given names
-with the general syntax:
-
-```fortran
-name: construct
-...
-    end construct name
-```
-- `construct` is `if`, `do`, or `select`
+<div class=column>
+- All the control structures (`if`, `select`, `do`) can be given names
 - Construct names can make long or nested `if` and `select` blocks
   more readable
 - `cycle` and `exit` can refer to name
     - Possible to e.g. cycle back to outer loop from inner loop
+</div>
 
-# Construct names: example
+<div class=column>
+
 
 ```fortran
-program gcd
-  ! computes the greatest common divisor, Euclidean algorithm
-  implicit none
-  integer :: m, n, t
-  write(*,*)’ give positive integers m and n :’
-  read(*,*) m, n
-  write(*,*)’m:’, m,’ n:’, n
-positive_check: if (m > 0 .and. n > 0) then
-main_algorithm: do while (n /= 0)             ! positive check and main_algorithm
-      t = mod(m,n)                            ! are the construct names
-      m = n
-      n = t
-    end do main_algorithm
-    write(*,*) ’greatest common divisor: ’, m
-  else
-    write(*,*) ’negative value entered’
-  end if positive_check
-end program gcd
+test: if (m > 0) then
+    ...
+    ...
+end if test
 ```
 
-# Construct names: example 2
 
 ```fortran
 ...
 outer: do i=1, 100
-    inner: do j=1, 100
+           do j=1, 100
 	          ...
-	          if (cond) cycle outer
-		   end do inner
-	   end do outer
+	          if (condition) cycle outer
+	       end do
+end do outer
 ```
+</div>
+
+# Construct names: example
+
+- Snippet from [FLEUR](http://www.flapw.de/site/) code
+<small>
+```fortran
+...
+naloop:DO na2 = na + 1,nat2
+            DO i = 1,3
+               sum_taual(i) = atoms%taual(i,na) + atoms%taual(i,na2)
+            END DO
+            DO ix = -2,2
+              sum_tau_lat(1) = sum_taual(1) + real(ix)
+              DO iy = -2,2
+                sum_tau_lat(2) = sum_taual(2) + real(iy)
+                DO iz = -2,2
+                  sum_tau_lat(3) = sum_taual(3) + real(iz)
+                  norm = sqrt(dot_product(matmul(sum_tau_lat,aamat),sum_tau_lat))
+                  IF (norm.LT.del) THEN
+                     atoms%invsat(na) = 1
+                     atoms%invsat(na2) = 2
+                     sym%invsatnr(na)  = na2
+                     sym%invsatnr(na2) = na
+                     WRITE (6,FMT=9000) n,na,na2
+                     cycle naloop
+                  END IF
+               END DO
+             END DO
+           END DO
+END DO naloop
+```
+</small>
 
 # Procedures
 
