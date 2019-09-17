@@ -110,10 +110,10 @@ gfortran -o myexe mymod.o myprog.o
 # Defining procedures in modules
 
 - In most cases, procedures should be defined in modules
-- Procedures are defined after **contains** keyword
+- Procedures are defined after `contains` keyword
 
 <div class="column">
-Function definition in module
+**Function** definition in module
 ```{.fortran emphasize=5:1-5:8,6:8-6:20}
 module geometry
   implicit none
@@ -142,14 +142,14 @@ program testprog
 end program testprog
 ```
 </div>
-
-# Defining procedures
+	
+# Defining procedures in modules
 
 - In most cases, procedures should be defined in modules
-- Procedures are defined after **contains** keyword
+- Procedures are defined after `contains` keyword
 
 <div class="column">
-Subroutine definition in module
+**Subroutine** definition in module
 ```{.fortran emphasize=5:1-5:8,6:3-6:17}
 module geometry
   implicit none
@@ -190,7 +190,7 @@ end program testprog
 Definition:
 
 ```fortran
-subroutine sub(arg1, arg2, ...)
+subroutine sub(dum_arg1, dum_arg2, ...)
   [declarations]
   [statements]
 
@@ -198,7 +198,7 @@ end subroutine sub
 ```
 Use as:
 
-`call sub(arg1, arg2,...)`
+`call sub(act_arg1, act_arg2,...)`
 </div>
 <div class="column">
 **Function**
@@ -206,7 +206,7 @@ Use as:
 Definition:
 
 ```fortran
-[type] function func(arg1, arg2, ...) &
+[type] function func(dum_arg1, dum_arg2, ...) &
        &  [result(val)]
   [declarations]
   [statements]
@@ -215,13 +215,18 @@ end function func
 
 Use as:
 
-`res = func(arg1, arg2, ...)`
+`res = func(act_arg1, act_arg2,...)`
 </div>
 
 
 # Procedure arguments
 
-- Fortran passes call arguments *by reference*
+- Types of arguments in procedure defition (dummy arguments)
+  need to be declared
+    - When calling the procedure, the types of actual arguments need
+      to match the definition.
+
+- Fortran passes arguments *by reference*
     - Only the memory addresses of the arguments are passed to the
       called procedure
     - Any change to the value of an argument changes the value at the
@@ -229,7 +234,7 @@ Use as:
           - Procedures can have *side-effects*
     - The *intent* attribute can be used to specify how argument is
       used
-
+  
 # Intent attribute
 
 <div class="column">
@@ -303,7 +308,7 @@ subroutine foo(x, y)
 
 <div class="column">
 ```fortran
-subroutine foo1(x)
+subroutine no_save(x)
   ...
   integer :: i
   i = 0
@@ -312,15 +317,15 @@ subroutine foo1(x)
 </div>
 <div class="column">
 ```fortran
-subroutine foo2(x)
+subroutine implicit_save(x)
   ...
   integer :: i = 0
   i = i + 1
 ```
 </div>
 
-- In `foo1` variable **i** starts always from 0 and gets value 1
-- In `foo2` variable **i** gets values 1, 2, 3, … in each successive
+- In `no_save` variable **i** starts always from 0 and gets value 1
+- In `implicit_save` variable **i** gets values 1, 2, 3, … in each successive
   call
 
 # Variables in modules
@@ -382,16 +387,80 @@ module visibility
 end module
 ```
 
-# Other procedure types{.section}
+# Intrinsic modules{.section}
 
-# Other procedure types
+# Intrinsic modules
 
-- In addition to *intrinsic* and *module* procedures Fortran has
-  *internal* and *external* procedures
-  - External procedures should nowadays be avoided
-    - can be needed when working with libraries (e.g BLAS and LAPACK)
-      or with old F77 code
+- Fortran standard defines several **intrinsic** modules that are part
+  of the Fortran language
+      - Most commonly used are `iso_fortran_env` and `iso_c_binding`
+- To make sure that the standard defined version is loaded, you can
+  specify the `intrinsic` on `use` clause:
 
+``` fortran
+use, intrinsic :: iso_fortran_env
+```
+
+
+# Precision of built-in numeric types
+
+- Fortran standard does not specify the precision of numeric types
+  (`integer`, `real`, `complex`) i.e.  how many bits are used for 
+  representing the number
+    - Default is often 32 bits (`real` has then 7 significant digits)
+- The numerical precision can be controlled through the `kind`
+  parameter:
+    - `real(kind=dp) :: number`
+    - Value of `kind` is integer which determines the precision
+    - Before Fortran 2003, the precision was typically defined with
+      the help of `selected_int_kind` and `selected_real_kind`
+      functions
+    - Nowadays one should use the standard precision types defined in
+      the intrinsic **iso_fortran_env** module
+
+# Precision of built-in numeric types
+  
+- The **iso_fortran_env** module contains several standard precision
+  types
+    - real32, real64, real128, int16, int32, ...
+- It is often a good practice to specify precision in a constant
+  module variable
+    - Precision can be changed with single modification
+
+
+```fortran
+module precision
+   use, intrinsic :: iso_fortran_env, only : real64, int16 
+   integer, parameter :: rp=real64, ip=int16
+end module
+...
+use precision
+real(kind=rp):: double_precision_number
+integer(kind=ip) :: short_integer_number
+```
+
+# Compiler version and options
+
+- In order to make results produced by an application more
+  reproducible, it can be useful to include in the output information
+  on how the application was compiled
+- The **iso_fortran_env** module contains two functions for that:
+  `compiler_version` and `compiler_options`
+  
+```fortran
+use, intrinsic :: iso_fortran_env
+write(*,*) 'Compiler: ', compiler_version()
+write(*,*) 'Options: ', compiler_options()
+```
+
+```console
+$ gfortran -o test test.f90 -O3 -ffast-math
+$ ./test
+ Compiler: GCC version 4.8.5 20150623 (Red Hat 4.8.5-36)
+ Options: -mtune=generic -march=x86-64 -O3 -ffast-math
+```
+
+# Other procedure types and interfaces{.section}
 
 # Internal procedures
 
@@ -422,72 +491,9 @@ end subroutine mySubroutine
 - Can be called only from declaring program unit
 - Often used for ”small and local, convenience” procedures
 
-# Intrinsic modules
-
-- Fortran standard defines several **intrinsic** modules that are part
-  of the Fortran language
-      - Most commonly used are `iso_fortran_env` and `iso_c_binding`
-- To make sure that the standard defined version is loaded, you can
-  specify the `intrinsic` on use clause:
-
-``` fortran
-use, intrinsic :: iso_fortran_env
-```
-
-# Built-in types and precision{.section}
-
-# Built-in data types in Fortran
-
-- Fortran has built-in data types for
-    - integers (**`integer`**)
-    - floating point numbers (**`real`**)
-    - complex numbers (**`complex`**)
-    - logical values (**`logical`**)
-    - variable length character strings (**`character(:)`**)
-- Each of these built-in types may be declared as multi-dimensional
-  arrays
-
-# Precision of built-in numeric types
-
-- Fortran standard does not specify the precision of numeric types,
-  i.e.  how many bits are used for representing the number
-    - Default is often 32 bits (real has then 7 significant digits)
-- The numerical precision can be controlled through the `kind`
-  parameter:
-    - `real(kind=dp) :: number`
-    - Value of `kind` is integer which determines the precision
-    - Before Fortran 2003, the precision was typically defined with
-      the help of `selected_int_kind` and `selected_real_kind`
-      functions
-    - Nowadays one should use the standard precision types defined in
-      the intrinsic **iso_fortran_env** module
-
-# Precision of built-in numeric types
-  
-- The **iso_fortran_env** module contains several standard precision
-  types
-    - real32, real64, real128, int16, int32, ...
-- It is often a good practice to specify precision in a constant
-  module variable
-    - Precision can be changed with single modification
-
-
-```fortran
-module precision
-   use iso_fortran_env, only : real64, int16 
-   integer, parameter :: rp=real64, ip=int16
-end module
-...
-use precision
-real(kind=rp):: double_precision_number
-integer(kind=ip) :: short_integer_number
-```
-
-# External procedures and interfaces{.section}
-
 # External procedures
 
-- Procedures that are defined in a separate program unit are called
+- Procedures that are defined in a separate non-module program unit are called
   **external procedures**
     - Old Fortran77 subruotines (e.g. BLAS, LAPACK)
     - Procedures written with different programming languages
@@ -495,7 +501,7 @@ integer(kind=ip) :: short_integer_number
     - Module procedures provide much better compile time error
       checking
 
-# Interfaces
+# Interfaces 
 
 - It is possible to define separate **interfaces** to external
   procedures
