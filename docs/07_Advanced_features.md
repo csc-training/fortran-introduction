@@ -79,6 +79,53 @@ function call_c_func(data, nx, ny) result(stat)
 end function call_c_func
 ```
 
+# Calling C routines
+
+- A Fortran *subroutine* maps to a C function with *void* result
+- A Fortran *function* maps to a C function returning a value
+- Binding label in **`bind(c, name=<label>)`**
+    - The routine is known to the C compiler as specified by the
+      binding label
+    - By default the Fortran name in lower case
+
+# Mapping of C intrinsic data types
+
+
+- Interoperable mappings for the most commonly used C intrinsic data
+  types (note that Fortran does not support unsigned integers)
+
+<center>
+  | Fortran declaration | C data type |
+  | ---                 | ---         |
+  | integer(c_short)    | short int   |
+  | integer(c_int)      | int         |
+  | integer(c_long)     | long int    |
+  | real(c_float)       | float       |
+  | real(c_double)      | double      |
+  | character(1,c_char) | char        |
+</center>
+
+# Value attribute
+
+- For scalar dummy arguments, the **`value`** attribute can be used to
+  pass the value to the procedure
+     - Actual argument is copied
+     - Dummy argument can be altered but result is not visible to
+       caller
+     - Argument must not be **`pointer`**, **`allocatable`**, have
+       **`intent(out)`** or **`intent(inout)`**, be a procedure
+- **`value`** attribute is not limited to procedures with **`binc`**
+  attribute
+
+# Other interoperability features
+
+- There are routines that can be used to transform C pointers back and
+  forth to Fortran
+    - Because C does not have as versatile arrays, there are several
+      restrictions on the interoperability of Fortran arrays
+- Also user-defined datatypes can be mapped between C and Fortran,
+  again with some restrictions
+
 # Object oriented programming
 
 - Object Oriented Programming (OOP) is programming paradigm where
