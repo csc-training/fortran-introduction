@@ -152,13 +152,13 @@ do i = 1, 4
   end do
 end do
 ```
-<!--
+
 <center>
 
-![](img/fortran_mem_layout_scattered.svg){.center width=70%}
+![](img/fortran_mem_layout_scattered.png){.center width=70%}
 
 </center>
--->
+
 </div>
 <div class="column">
 **Structure of Arrays**
@@ -175,13 +175,13 @@ do i = 1, 4
   end do
 end do
 ```
-<!--
+
 <center>
 
-![](img/fortran_mem_layout_contiguous.svg){.center width=70%}
+![](img/fortran_mem_layout_contiguous.png){.center width=70%}
 
 </center>
--->
+
 </div>
 
 # Summary
