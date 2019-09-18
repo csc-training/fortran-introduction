@@ -119,12 +119,16 @@ end function call_c_func
 
 # Other interoperability features
 
-- There are routines that can be used to transform C pointers back and
-  forth to Fortran
-    - Because C does not have as versatile arrays, there are several
-      restrictions on the interoperability of Fortran arrays
-- Also user-defined datatypes can be mapped between C and Fortran,
-  again with some restrictions
+- Concept of a pointer is completely different in Fortran and C
+    - In Fortran, pointer is a storage descriptor that holds the
+      address of a *target* and in case of arrays, information on
+      dimension and bounds
+    - C pointer is an memory address with associated type
+- Module **`iso_c_bindings`** contains Fortran type definitions for C
+  pointers and function pointers
+    - **`type(c_ptr)`** abstracts C pointers and
+    - **`type(c_fun_ptr)`** abstract C function pointers
+- These are needed when manipulating raw C pointers
 
 # Object oriented programming
 
@@ -147,7 +151,6 @@ end function call_c_func
 - Integrated into Fortran 2008 standard
     - Compiler support is still incomplete (Cray: excellent, Intel:
       moderate, GNU: experimental)
-
 
 # Summary
 
