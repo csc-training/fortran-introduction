@@ -114,7 +114,7 @@ end function call_c_func
        caller
      - Argument must not be **`pointer`**, **`allocatable`**, have
        **`intent(out)`** or **`intent(inout)`**, be a procedure
-- **`value`** attribute is not limited to procedures with **`binc`**
+- **`value`** attribute is not limited to procedures with **`bind`**
   attribute
 
 # Other interoperability features
