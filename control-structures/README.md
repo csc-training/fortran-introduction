@@ -1,5 +1,9 @@
 ## Control structures
 
+In this exercise you can practice the various control structures that 
+Fortran provides. No skeleton codes are provided, so you should implement 
+the whole program yourself.
+
 1. Write an `if` structure which checks whether an integer is negative, 
    zero, or larger than 100 and performs corresponding write. Investigate 
    the behavior with different integer values.
@@ -21,4 +25,3 @@
 4. Print out Fibonacci numbers F<sub>n</sub> < 650 first using `do while` loop 
    and then finally with `do` loop with explicit `exit` statement.
    Which form suits better this particular case?
-
