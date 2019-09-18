@@ -88,9 +88,10 @@ write(*,'(4(i5,2x,f8.3))') (ivec(j),zvec(j),j=1,4)
 - Output fields are left justified with all the unnecessary leading blanks
   (and precision for **real** valued variables) removed
 ``` fortran
+use iso_fortran_env, only : real32, real64
 integer :: i = 12345
-real (kind=4) :: sp = 1.23e0
-real (kind=8) :: dp = 1.234567890d0
+real (kind=real32) :: sp = 1.23_real32
+real (kind=real64) :: dp = 1.234567890_real64
 write(*,fmt='("<i=",i0,", reals=",g0,1x,g0,">")') i,sp,dp
 ```
 - Output is **`<i=12345, reals=1.230000 1.234567890000000>`**
@@ -110,7 +111,7 @@ write(*,fmt='("<i=",i0,", reals=",g0,1x,g0,">")') i,sp,dp
 # Opening and closing files: basic concepts
 
 - By now, we have written to terminal or read from keyboard with <br>
-  `write(*, ...)` and `read(*, ...)`
+  **`write(*, ...)`** and **`read(*, ...)`**
 - Writing to or reading from a file is similar with few differences:
     - File must be opened with an OPEN statement, in which the unit
       number and (optionally) the file name are given
@@ -173,8 +174,8 @@ close(unit=10, status='keep')
     - various file attributes
 - The syntax has two forms, one based on file name, the other for unit
   number
-    -  `inquire(file='name', options ...)` or
-    -  `inquire(unit=iu, options ...)`
+    -  **`inquire(file='name', options ...)`** or
+    -  **`inquire(unit=iu, options ...)`**
 
 # File opening: file properties
 
@@ -240,6 +241,7 @@ read(unit=iu, fmt=*) str
 # Unformatted I/O
 
 - Write to a sequential binary file
+
 ``` fortran
 real :: rval
 character(len=60) :: string
@@ -248,8 +250,10 @@ write(10) rval
 write(10) string
 close(10)
 ```
+
 - No format descriptors allowed
 - Reading similarly
+
 ``` fortran
 read(10) rval
 read(10) string
@@ -272,6 +276,8 @@ write(10) dbheader
 
 # Internal I/O
 
+<div class="column">
+
 - Often it is necessary to filter out data from a given character
   string
     - Or to pack values into a character string
@@ -279,6 +285,10 @@ write(10) dbheader
   instead of unit number one provides character array as first
   argument
      - Actual files are not involved at all
+
+</div>
+
+<div class="column">
 
 ```fortran
 character(len=13) :: s1
@@ -290,8 +300,10 @@ s1 = 'time step\# 10'
 read(s1,fmt='(10x,i3)') istep
 ! write data to a character string
 njobs = 2014
-write(s2,'(a,i0)') 'the number of jobs completed = ', njobs
+write(s2,'(a,i0)') '# of jobs completed = ', &
+     & njobs
 ```
+</div>
 
 # Command line input
 

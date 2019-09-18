@@ -439,6 +439,25 @@ real(kind=rp):: double_precision_number
 integer(kind=ip) :: short_integer_number
 ```
 
+# Note on precision of constants
+
+- Unlike in C, Fortran floating point constants are *single precision*
+  by default
+- When double precision constant is needed, use underline suffix with
+  kind, for example:
+
+```fortran
+use, intrinsic :: iso_fortran_env, only : real64
+real(kind=real64) :: value32, value64
+value32 = 0.1
+value64 = 0.1_real64 ! you may see 3d0 in old codes
+write(*,'(G0)') value32
+write(*,'(G0)') value64
+! Result:
+! 0.10000000149011612
+! 0.10000000000000001
+```
+
 # Compiler version and options
 
 - In order to make results produced by an application more
