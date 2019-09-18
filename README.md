@@ -12,7 +12,7 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Program compilation and execution](hello)
  - [Control structures](control-structures)
 
-### Procedures and modules
+### Modules and procedures
  - [Functions, subroutines and modules](procedures)
 
 ### Fortran arrays
