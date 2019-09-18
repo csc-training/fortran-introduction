@@ -102,7 +102,7 @@ end program square_root_example
     - A variable name can be no longer than 31 characters containing
       only letters, digits or underscore, and must start with a letter
     - Maximum row length is 132 characters
-- No distinction between lower and uppercase characters
+- No distinction between lower and upper case characters
     - Character strings are case sensitive
 - Line break is the statement separator
     - If a line is ended with an ampersand (&), the line continues
@@ -110,32 +110,63 @@ end program square_root_example
     - Semicolon (;) is the separator between statements on a single
       line
 
-# Variables
-
-```fortran
-integer :: n0
-real :: a, b
-real :: r1=0.0
-complex :: c
-complex :: imag_number=(0.1, 1.0)
-
-character(len=80) :: place
-character(len=80) :: name='james bond'
-
-logical :: test0 = .true.
-logical :: test1 = .false.
-real, parameter :: pi=3.14159
-```
 
 # Variables
 
-- *Constants* are defined with the PARAMETER attribute – they cannot
-  be altered after their declaration
 - *Variables* must be *declared* at the beginning of the program or
   procedure where they are used
-- They can also be given a value at declaration (not recommended)
+    - They can also be given a value at declaration (not recommended)
+- *Constants* are defined with the PARAMETER attribute – they cannot
+  be altered after their declaration
+    - Value *must* be given at declaration
 - The *intrinsic* data types in Fortran are `integer`, `real`,
 `complex`, `character` and `logical`
+
+# Variables
+
+
+<div class=column>
+**Numbers** and **logical** 
+```fortran
+integer :: n
+real :: a, b  ! Multiple variables of same type
+complex :: imag_number
+logical :: test0, test1
+real, parameter :: pi=3.14159
+
+n = 42
+a = 2.2
+imag_number=(0.1, 1.0)
+test0 = .true.
+test1 = .false.
+
+! Automatic conversion between numeric types
+b = n + a
+! floor operation in real to integer conversion
+n = b + 3
+```
+</div>
+<div class=column>
+**Strings**
+```fortran
+character :: my_char  ! string with length one
+character(len=80) :: my_str
+character(len=*), parameter :: name='james bond'
+
+! Only first character stored
+my_char = 'too long!'
+
+! ' ' and " " are equivalent delimiters
+my_str = 'simple string'
+! or
+my_str = "simple string" 
+
+! including ' and " characters inside a string
+my_str = "this isn't so simple"
+my_str = 'is this "complex" string?'
+
+```
+</div>
 
 # Operators
 
@@ -160,22 +191,26 @@ a.and.b ! logical conjunction precedence: second
 a.or.b  ! logical inclusive disjunction precedence: third
 ```
 
-# Arrays and strings
+# Arrays
 
 ```fortran
 ! Arrays
 integer, parameter :: m = 100, n = 500
 integer :: idx(m)
-real :: vector(0:n-1)
+real :: vector(-n:n)
 real :: matrix(m, n)
-character (len=80) :: screen (24)
+character(len=80) :: screen(24)
 ! or
 integer, dimension(m) :: idx
-real, dimension(0:n-1) :: vector
+real, dimension(-n:n) :: vector
 real, dimension(m, n) :: matrix
 character(len=80), dimension(24) :: screen
+
+matrix(3, 4) = idx(3) * 2.0
+vector(-3) = 4.2
 ```
-By default, Fortran indexing starts from 1
+- By default, Fortran indexing starts from 1
+    - Programmer can define arbitrary (integer) starting and ending indices
 
 # Control structures {.section}
 
