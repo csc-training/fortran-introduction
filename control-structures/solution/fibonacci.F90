@@ -1,6 +1,7 @@
 program fibonacci
   implicit none
   integer :: i, f0, f1, fn
+  integer, parameter :: nmax = 15, fmax = 650
 
   write(*,*) 'With integer counter:'
 
@@ -8,7 +9,7 @@ program fibonacci
   f1 = 1
   write(*,*) f0
   write(*,*) f1
-  do i=2, 15
+  do i=2, nmax
      fn = f0 + f1
      write(*,*) fn
      f0 = f1
@@ -21,7 +22,7 @@ program fibonacci
   write(*,*) f0
   write(*,*) f1
   fn = f1 + f0
-  do while (fn < 650)
+  do while (fn < fmax)
      write(*,*) fn
      f0 = f1
      f1 = fn
@@ -35,7 +36,7 @@ program fibonacci
   write(*,*) f1
   do
      fn = f0 + f1
-     if (fn > 650) exit
+     if (fn > fmax) exit
      write(*,*) fn
      f0 = f1
      f1 = fn
