@@ -9,7 +9,7 @@ with variable declarations and assignments.
 to them. Try different types of numbers, logical values as well as strings.
 
 3. Make some (likely less meaningful) computations using those variables and
-print out the values of those. Try to mix `integer`s and `real`s in
+print out the values of those. Try to mix `integer`, `real` and `complex` types in
 computations and check how automatic type conversions behave (`real` ->
 `integer`, `integer` -> `real`, `complex` -> `integer`, etc.)
 
