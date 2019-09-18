@@ -1,16 +1,27 @@
-## Procedures and modules
+## Modules and procedures
 
-a) Write a function to compute the factorial n!=1\*2\*...\*n  of a given
-integer number n (we can fix this number, say n=10). A starting point is
-provided in [factorial_a.F90](factorial_a.F90)
+### Simple module
 
-b) Starting from the previous part, rewrite the function to be an
-internal subroutine that takes in an array of integers as an input and compute
-the elementwise factorial of the elements as an output
+Implement a module called `math` which defines mathematical constats
+**pi** (~ 3.1416...) and **e** (base of natural logarithm, exp(1) ~
+2.7183).
 
-c) Move the subroutine in a separate module, located in a separate file,
-and call it from the main program. The compilation line is then
+Utilize the module from a main program and print out the constants.
+
+The program can be build as
 ```
-gfortran -o factorial factmod.F90 factorial_c.F90
+gfortran -o math_test math.F90 main.F90
 ```
 
+### Module procedures
+
+1. Add to your `math` module a function that takes as input the radius of
+   circle and returns the area of the circle.
+   
+2. Add to your `math` module a subroutine that converts a polar
+   coordinate representation (**r**, **phi**) into cartesian
+   representation (**x**, **y**). Implement also a subroutine which
+   does the reverse transformation. The formulas are: 
+
+	x = r * cos(phi), y = r * sin(phi), r<sup>2</sup> =
+    x<sup>2</sup> + y<sup>2</sup>
