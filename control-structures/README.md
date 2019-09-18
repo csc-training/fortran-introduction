@@ -25,3 +25,6 @@ the whole program yourself.
 4. Print out Fibonacci numbers F<sub>n</sub> < 650 first using `do while` loop 
    and then finally with `do` loop with explicit `exit` statement.
    Which form suits better this particular case?
+
+5. Write a program that determines the sum of squares of even numbers
+   up to 10: s = 0^2 + 2^2 + 4^2 + ... + 10^2
