@@ -1,7 +1,7 @@
 ---
-title:  Introduction to Fortran
-author: PTC / CSC
-date:   2019
+title:  Fortran Programming for Scientific Computing
+author: Prace Training Center / CSC
+date:   September 2019
 lang:   en
 ---
 
