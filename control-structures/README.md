@@ -27,4 +27,4 @@ the whole program yourself.
    Which form suits better this particular case?
 
 5. Write a program that determines the sum of squares of even numbers
-   up to 10: s = 0^2 + 2^2 + 4^2 + ... + 10^2
+   up to 10: s = 0<sup>2</sup> + 2<sup>2</sup> + 4<sup>2</sup> + ... + 10<sup>2</sup>
