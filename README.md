@@ -11,7 +11,7 @@ Computing". The course is part of the PRACE Training activity at CSC
 ### Getting started with Fortran
  - [Program compilation and execution](hello)
  - [Control structures](control-structures)
- - [Bonus: finite-difference laplacian](finite-difference)
+ - [Bonus: finite-difference Laplacian](finite-difference)
 
 ### Modules and procedures
  - [Functions, subroutines and modules](procedures)
