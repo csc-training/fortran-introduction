@@ -14,7 +14,7 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Bonus: finite-difference Laplacian](finite-difference)
 
 ### Modules and procedures
- - [Functions, subroutines and modules](procedures)
+ - [Simple module](modules)
 
 ### Fortran arrays
  - [Loops, arrays, and array syntax](loops-arrays)
