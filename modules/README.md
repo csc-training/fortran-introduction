@@ -24,4 +24,4 @@ gfortran -o math_test math.F90 main.F90
    does the reverse transformation. The formulas are: 
 
 	x = r * cos(phi), y = r * sin(phi), r<sup>2</sup> =
-    x<sup>2</sup> + y<sup>2</sup>
+    x<sup>2</sup> + y<sup>2</sup>, phi = atan2(y, x)
