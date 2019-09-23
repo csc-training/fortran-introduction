@@ -17,7 +17,7 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Simple module](modules)
 
 ### Fortran arrays
- - [Loops, arrays, and array syntax](loops-arrays)
+ - [Array sections](array-section)
  - [Dynamic arrays and intrinsinc functions](dynamic-arrays)
 
 ### Input and output
