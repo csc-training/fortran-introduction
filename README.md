@@ -15,6 +15,7 @@ Computing". The course is part of the PRACE Training activity at CSC
 
 ### Modules and procedures
  - [Simple module](modules)
+ - [Scoping](scoping)
 
 ### Fortran arrays
  - [Loops, arrays, and array syntax](loops-arrays)
