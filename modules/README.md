@@ -3,7 +3,7 @@
 ### Simple module
 
 Implement a module called `math` which defines mathematical constats
-**pi** (~ 3.1416...) and **e** (base of natural logarithm, exp(1) ~
+**pi** (~ 3.1416...) and **e** (base of natural logarithm, e=exp(1) ~
 2.7183).
 
 Utilize the module from a main program and print out the constants.
