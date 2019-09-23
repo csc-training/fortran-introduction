@@ -15,6 +15,7 @@ Computing". The course is part of the PRACE Training activity at CSC
 
 ### Modules and procedures
  - [Simple module](modules)
+ - [Scoping](scoping)
 
 ### Fortran arrays
  - [Array sections](array-section)
@@ -27,5 +28,6 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Derived types](derived-types)
 
 ### Other exercises
+ - [Operator overloading](vecmod)
  - [Command line arguments](command-line)
  - [Bonus: Heat equation](heat-equation)
