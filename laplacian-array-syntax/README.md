@@ -1,7 +1,6 @@
-## Using the array syntax
+## Using the array syntax in Laplacian
 
-In this exercise you can practive operating with arrays without
-explicit do loops by using the array syntax.
+In this exercise you can try more complex operations with array syntax.
 
 Go back to the exercise [finite-difference Laplacian](../finite-difference) 
 and implement the finite-difference evaluation using array syntax and
