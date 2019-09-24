@@ -16,6 +16,7 @@ Computing". The course is part of the PRACE Training activity at CSC
 ### Modules and procedures
  - [Simple module](modules)
  - [Scoping](scoping)
+ - [Intrinsic modules and type precision](intrinsic-modules)
 
 ### Fortran arrays
  - [Array sections](array-section)
