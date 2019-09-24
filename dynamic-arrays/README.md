@@ -1,4 +1,4 @@
-## Dynamic arrays and intrinsinc functions
+## Dynamic arrays and array intrinsincs
 a) Define a matrix A which should be dynamically allocatable. Then
 allocate the matrix with sizes read in from the user input and fill the matrix
 with random numbers using the array intrinsic function `random_number`.
