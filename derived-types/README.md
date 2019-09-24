@@ -1,21 +1,12 @@
-## Derived types
+## Simple derived type
 
-a) Define a derived type for a temperature field. Do the definition within a
-module (let’s call it heat). The type contains the following elements: 
+In this exercise you can practice making a procedure interface more
+compact with the help of derived types.
 
- - Number of grid points nx (=number of rows) and ny (=number of columns) (integers)
- - The grid spacings dx and dy in the x- and in the y-directions (real numbers)
- - An allocatable two-dimensional, real-valued array containing the data points 
-  of the field. 
+The main program [derived-types.F90](derived-types.F90) and the module
+[coulomb.F90](coulomb.F90) contain code that calculate the force
+between two charged particles.
 
-Define the real-valued variables into double precision, using the 
-`ISO_FORTRAN_ENV` intrinsic module. 
-
-b) Let us extend the module started by adding the initialization
-of the two-dimensional array (item a) in
-[control-structures](../control-structures)) and finite-difference Laplacian (in
-[loops-array](../loops-arrays)) into their own functions, which now take the type 
-representing the temperature field as an input.
-
-
-
+Implement a derived type for charged particle in the
+[coulomb.F90](coulomb.F90) module, and use that both in the main
+program and in the module procedure.

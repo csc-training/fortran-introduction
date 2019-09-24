@@ -31,7 +31,8 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Bonus: Reading data from a file](io)
 
 ### Derived types
- - [Derived types](derived-types)
+ - [Using derived types](derived-types)
+ - [Bonus: derived type for heat equation](derived-types-heat)
 
 ### Other exercises
  - [Operator overloading](vecmod)
