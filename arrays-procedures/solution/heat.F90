@@ -23,9 +23,9 @@ contains
     ! initialize array to x^2 + y^2
     ! origo is in the center of the grid so we shift by (nx/y + 1) / 2
     do j = lny, uny
-       y = (j - (uny - lny + 2) / 2.0) * dy
+       y = (j - (uny + lny) / 2.0) * dy
        do i = lnx, uny
-          x = (i - (unx - lnx + 2) / 2.0) * dx
+          x = (i - (unx + lny) / 2.0) * dx
           A(i,j) = x**2 + y**2
        end do
     end do
