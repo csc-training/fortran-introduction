@@ -62,9 +62,9 @@ contains
 
   end subroutine initialize
 
-  ! Generate initial the temperature field.  Pattern is disc with a radius
-  ! of nx_full / 6 in the center of the grid.
-  ! Boundary conditions are (different) constant temperatures outside the grid
+  ! Generate initial the temperature field.  Pattern is x**2 + y**2
+  ! with the origo in the center of the grid.
+
   subroutine generate_field(field0)
     use heat
 
@@ -72,43 +72,20 @@ contains
 
     type(field), intent(inout) :: field0
 
-    real(dp) :: radius2
-    integer :: i, j, ds2
+    real(dp) :: x, y
+    integer :: i, j 
 
     ! The arrays for field contain also a halo region
     allocate(field0%data(0:field0%nx+1, 0:field0%ny+1))
 
-    ! Square of the disk radius
-    radius2 = (field0%nx / 6.0_dp)**2
-
     do j = 0, field0%ny + 1
+       y = (j - (field0%ny + 1) / 2.0) * field0%dy
        do i = 0, field0%nx + 1
-          ds2 = int((i - field0%nx / 2.0_dp + 1)**2 + &
-               & (j - field0%ny / 2.0_dp + 1)**2)
-          if (ds2 < radius2) then
-             field0%data(i,j) = 5.0_dp
-          else
-             field0%data(i,j) = 65.0_dp
-          end if
+          x = (i - (field0%nx + 1) / 2.0) * field0%dx
+          field0%data(i,j) = 100 - (x**2 + y**2)*50
        end do
     end do
 
-    ! Boundary conditions
-    do j = 0, field0%nx + 1
-       field0%data(j, 0) = 20.0_dp
-    end do
-
-    do j = 0, field0%nx + 1
-       field0%data(j, field0%ny + 1) = 70.0_dp
-    end do
-
-    do j = 0, field0%ny + 1
-       field0%data(0, j) = 85.0_dp
-    end do
-
-    do j = 0, field0%ny+1
-       field0%data(field0%nx + 1, j) = 5.0_dp
-    end do
   end subroutine generate_field
 
 
