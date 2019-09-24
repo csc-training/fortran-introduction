@@ -12,5 +12,5 @@ program lap
   call initialize(current)
   call laplacian(previous, current)
   call print_field(current)
-  
+
 end program lap

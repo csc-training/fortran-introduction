@@ -60,5 +60,5 @@ contains
        write(*,'(*(F6.1))') field0%data(i,:)
     end do
   end subroutine print_field
-  
+
 end module laplacian_mod

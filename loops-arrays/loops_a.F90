@@ -27,43 +27,43 @@ program loops
   end if
 
 
-  contains
-    subroutine apply_fd_laplacian(x, y, dx, dy)
-      implicit none
-      real, intent(in) :: x(:,:)
-      real, intent(out) :: y(:,:)
-      real, intent(in) :: dx, dy
-      
-      !TODO: write do loop that takes x as input and outputs y
+contains
+  subroutine apply_fd_laplacian(x, y, dx, dy)
+    implicit none
+    real, intent(in) :: x(:,:)
+    real, intent(out) :: y(:,:)
+    real, intent(in) :: dx, dy
+
+    !TODO: write do loop that takes x as input and outputs y
 
 
 
 
 
-    end subroutine apply_fd_laplacian
+  end subroutine apply_fd_laplacian
 
-    function check_result(x, y, dx, dy) result(iscorrect)
-      implicit none
-      real, intent(in) :: x(:,:), y(:,:)
-      real, intent(in) :: dx, dy
+  function check_result(x, y, dx, dy) result(iscorrect)
+    implicit none
+    real, intent(in) :: x(:,:), y(:,:)
+    real, intent(in) :: dx, dy
 
-      real :: yc(size(x,1),size(x,2)) 
-      integer :: lny, uny, lnx, unx
-      real, parameter :: tol = 1e-15
-      logical :: iscorrect 
+    real :: yc(size(x,1),size(x,2))
+    integer :: lny, uny, lnx, unx
+    real, parameter :: tol = 1e-15
+    logical :: iscorrect
 
-      lny = lbound(x,2)+1
-      uny = ubound(x,2)-1
-      lnx = lbound(x,1)+1
-      unx = ubound(x,1)-1
+    lny = lbound(x,2)+1
+    uny = ubound(x,2)-1
+    lnx = lbound(x,1)+1
+    unx = ubound(x,1)-1
 
-      yc = 0.0
+    yc = 0.0
 
-      yc(lnx:unx,lny:uny) = &
-           & (x(lnx-1:unx-1,lny:uny)-2*x(lnx:unx,lny:uny)+x(lnx+1:unx+1,lny:uny))/dx**2 + &
-           & (x(lnx:unx,lny-1:uny-1)-2*x(lnx:unx,lny:uny)+x(lnx:unx,lny+1:uny+1))/dy**2
+    yc(lnx:unx,lny:uny) = &
+         & (x(lnx-1:unx-1,lny:uny)-2*x(lnx:unx,lny:uny)+x(lnx+1:unx+1,lny:uny))/dx**2 + &
+         & (x(lnx:unx,lny-1:uny-1)-2*x(lnx:unx,lny:uny)+x(lnx:unx,lny+1:uny+1))/dy**2
 
-      iscorrect = all(abs(yc(lnx:unx,lny:uny)-y(lnx:unx,lny:uny))<tol)
-    end function check_result
+    iscorrect = all(abs(yc(lnx:unx,lny:uny)-y(lnx:unx,lny:uny))<tol)
+  end function check_result
 
 end program loops

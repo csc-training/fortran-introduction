@@ -1,9 +1,9 @@
 program formatdemo
   implicit none
-  integer :: i, io_stat, alloc_stat
+  integer :: i, io_stat
   integer, parameter :: n = 10
   integer :: values(n)
-  
+
   values = [ (i, i = 1, n) ]
 
   open(unit=11, file='array.txt', iostat=io_stat)
@@ -21,5 +21,5 @@ program formatdemo
   if (io_stat /= 0) call abort()
   write(11) values
   close(11)
-  
+
 end program formatdemo

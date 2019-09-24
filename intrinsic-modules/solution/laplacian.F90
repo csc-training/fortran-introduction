@@ -16,7 +16,7 @@ program laplacian
   write(*,*) 'Options: ', compiler_options()
   write(*,*)
 
-  ! initialize array to x^2 + y^2 
+  ! initialize array to x^2 + y^2
   ! origo is in the center of the grid so we shift by (nx/y + 1) / 2
   do j = 0, ny + 1
      y = (j - (ny + 1) / 2.0) * dy

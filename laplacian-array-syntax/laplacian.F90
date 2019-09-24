@@ -9,7 +9,7 @@ program laplacian
   real :: x, y
   integer :: i, j
 
-  ! initialize array to x^2 + y^2 
+  ! initialize array to x^2 + y^2
   ! origo is in the center of the grid so we shift by (nx/y + 1) / 2
   do j = 0, ny + 1
      y = (j - (ny + 1) / 2.0) * dy
@@ -21,7 +21,7 @@ program laplacian
 
   L = 0.0
   ! TODO evaluate the laplacian L in inner grid (1:nx, 1:ny)
-  ! without do loop using the array syntax 
+  ! without do loop using the array syntax
 
 
 

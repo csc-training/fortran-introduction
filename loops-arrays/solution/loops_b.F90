@@ -27,51 +27,51 @@ program loops
   end if
 
 
-  contains
-    subroutine apply_fd_laplacian(x, y, dx, dy)
-      implicit none
-      real, intent(in) :: x(:,:)
-      real, intent(out) :: y(:,:)
-      real, intent(in) :: dx, dy
-      
-      real :: dx2, dy2
-      integer :: i, j, lnx, unx, lny, uny
+contains
+  subroutine apply_fd_laplacian(x, y, dx, dy)
+    implicit none
+    real, intent(in) :: x(:,:)
+    real, intent(out) :: y(:,:)
+    real, intent(in) :: dx, dy
 
-      lnx = lbound(x,1) + 1
-      unx = ubound(x,1) - 1
-      lny = lbound(x,2) + 1
-      uny = ubound(x,2) - 1  
-      dx2 = dx**2
-      dy2 = dy**2
+    real :: dx2, dy2
+    integer :: i, j, lnx, unx, lny, uny
 
-      y(lnx:unx,lny:uny) = &
-           (x(lnx-1:unx-1,lny:uny)-2*x(lnx:unx,lny:uny)+x(lnx+1:unx+1,lny:uny))/dx2 + &
-           (x(lnx:unx,lny-1:uny-1)-2*x(lnx:unx,lny:uny)+x(lnx:unx,lny+1:uny+1))/dy2
+    lnx = lbound(x,1) + 1
+    unx = ubound(x,1) - 1
+    lny = lbound(x,2) + 1
+    uny = ubound(x,2) - 1
+    dx2 = dx**2
+    dy2 = dy**2
 
-    end subroutine apply_fd_laplacian
+    y(lnx:unx,lny:uny) = &
+         (x(lnx-1:unx-1,lny:uny)-2*x(lnx:unx,lny:uny)+x(lnx+1:unx+1,lny:uny))/dx2 + &
+         (x(lnx:unx,lny-1:uny-1)-2*x(lnx:unx,lny:uny)+x(lnx:unx,lny+1:uny+1))/dy2
 
-    function check_result(x, y, dx, dy) result(iscorrect)
-      implicit none
-      real, intent(in) :: x(:,:), y(:,:)
-      real, intent(in) :: dx, dy
+  end subroutine apply_fd_laplacian
 
-      real :: yc(size(x,1),size(x,2)) 
-      integer :: lny, uny, lnx, unx
-      real, parameter :: tol = 1e-15
-      logical :: iscorrect 
+  function check_result(x, y, dx, dy) result(iscorrect)
+    implicit none
+    real, intent(in) :: x(:,:), y(:,:)
+    real, intent(in) :: dx, dy
 
-      lny = lbound(x,2) + 1
-      uny = ubound(x,2) - 1
-      lnx = lbound(x,1) + 1
-      unx = ubound(x,1) - 1
+    real :: yc(size(x,1),size(x,2))
+    integer :: lny, uny, lnx, unx
+    real, parameter :: tol = 1e-15
+    logical :: iscorrect
 
-      yc = 0.0
+    lny = lbound(x,2) + 1
+    uny = ubound(x,2) - 1
+    lnx = lbound(x,1) + 1
+    unx = ubound(x,1) - 1
 
-      yc(lnx:unx,lny:uny) = &
-           (x(lnx-1:unx-1,lny:uny)-2*x(lnx:unx,lny:uny)+x(lnx+1:unx+1,lny:uny))/dx**2 + &
-           (x(lnx:unx,lny-1:uny-1)-2*x(lnx:unx,lny:uny)+x(lnx:unx,lny+1:uny+1))/dy**2
+    yc = 0.0
 
-      iscorrect = all(abs(yc(lnx:unx,lny:uny)-y(lnx:unx,lny:uny))<tol)
-    end function check_result
+    yc(lnx:unx,lny:uny) = &
+         (x(lnx-1:unx-1,lny:uny)-2*x(lnx:unx,lny:uny)+x(lnx+1:unx+1,lny:uny))/dx**2 + &
+         (x(lnx:unx,lny-1:uny-1)-2*x(lnx:unx,lny:uny)+x(lnx:unx,lny+1:uny+1))/dy**2
+
+    iscorrect = all(abs(yc(lnx:unx,lny:uny)-y(lnx:unx,lny:uny))<tol)
+  end function check_result
 
 end program loops

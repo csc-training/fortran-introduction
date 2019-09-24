@@ -22,6 +22,6 @@ program arrays_procedures
   write(*,*) "Laplacian of the array:"
   do i = 1, nx
      write(*,'(*(G9.1))') L(i,1:ny)
-  end do  
+  end do
 
 end program arrays_procedures

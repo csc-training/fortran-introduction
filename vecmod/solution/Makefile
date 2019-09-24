@@ -1,11 +1,5 @@
 ifeq ($(COMP),)
-COMP=cray
-endif
-
-ifeq ($(COMP),cray)
-CC=cc
-FC=ftn 
-FCFLAGS=-efmw -hcpu=sandybridge
+COMP=gnu
 endif
 
 ifeq ($(COMP),gnu)

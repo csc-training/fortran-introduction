@@ -16,7 +16,7 @@ program hello
   r = 3.6
   a = r
   write(*,*) 'Real to integer conversion:'
-  write(*,*) r, '-> ', a 
+  write(*,*) r, '-> ', a
 
   c = (2.2, 2.3)
   r = c

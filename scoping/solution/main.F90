@@ -17,5 +17,5 @@ program counter_test
 
   ! Print count variable for comparison
   write (*,'(A,I3)') 'Main program count variable: ', count
-  
+
 end program counter_test

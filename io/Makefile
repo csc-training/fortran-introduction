@@ -2,7 +2,7 @@ ifeq ($(COMP),)
 COMP=gnu
 endif
 
-COMMONDIR=./
+COMMONDIR=.
 
 ifeq ($(COMP),gnu)
 FC=gfortran

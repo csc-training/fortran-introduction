@@ -14,4 +14,3 @@ program array_syntax
   write(*,*) 'difference: ', dif
 
 end program array_syntax
-

@@ -20,15 +20,18 @@ program array
   end do
 
   ! TODO: Fill in the missing parts
-  write (*,*) 'Sum of elements across 2nd dimension of A: ', sum(A,2) 
+  write (*,'(A,(*(F5.2,:,", ")))') &
+       & 'Sum of elements across 2nd dimension of A: ', sum(A,2)
 
-  write (*,*) 'Coordinates of maximum element: ', maxloc(A)
+  write (*,'(A,(*(I0,:,", ")))') &
+       & 'Coordinates of maximum element: ', maxloc(A)
 
-  write (*,*) 'Absolute minimum value: ', minval(A) 
+  write (*,'(A,G0)') 'Absolute minimum value: ', minval(A)
 
-  write (*,*) 'Are elements of A greater than or equal to 0: ', any(A >= 0.0)
+  write (*,'(A,L)') &
+       & 'Are elements of A greater than or equal to 0: ', any(A >= 0.0)
 
-  write (*,*) 'Number of elements greater than or equal to 0.5: ', count(A >= 0.5)
-
+  write (*,'(A,I0)') &
+       & 'Number of elements greater than or equal to 0.5: ', count(A >= 0.5)
 
 end program array

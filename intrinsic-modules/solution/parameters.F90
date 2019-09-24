@@ -4,4 +4,4 @@ module parameters
 
   integer, parameter :: dp=real64
 
-end module
+end module parameters

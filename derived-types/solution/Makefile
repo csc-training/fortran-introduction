@@ -1,11 +1,5 @@
 COMP=gnu
 
-ifeq ($(COMP),cray)
-CC=cc
-FC=ftn 
-FCFLAGS=-efmw -hcpu=sandybridge
-endif
-
 ifeq ($(COMP),gnu)
 CC=gcc
 FC=gfortran
