@@ -15,7 +15,7 @@ based on a previous iteration (the routine is called `evolve` here):
 <!-- Equation
 u^{m+1}(i,j) = u^m(i,j) + \Delta t \alpha \nabla^2 u^m(i,j)
 -->
-![img](https://latex.codecogs.com/gif.latex?u^{m&plus;1}(i,j)&space;=&space;u^m(i,j)&space;&plus;&space;\Delta&space;t&space;\alpha&space;\nabla^2&space;u^m(i,j)
+![img](https://latex.codecogs.com/gif.latex?u^{m&plus;1}(i,j)&space;=&space;u^m(i,j)&space;&plus;&space;\Delta&space;t&space;\alpha&space;\nabla^2&space;u^m(i,j))
 
 utilizing our earlier implementation of the Laplacian in the last term.
 The skeleton codes readily contain suitable values for time step and for 
