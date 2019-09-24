@@ -21,7 +21,7 @@ Computing". The course is part of the PRACE Training activity at CSC
 ### Fortran arrays
  - [Array sections](array-sections)
  - [Array syntax](array-syntax)
- - [Dynamic arrays and intrinsinc functions](dynamic-arrays)
+ - [Dynamic arrays and array intrinsincs](dynamic-arrays)
  - [Bonus: passing arrays to procedures](arrays-procedures)
 
 ### Input and output
