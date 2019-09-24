@@ -19,7 +19,7 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Intrinsic modules and type precision](intrinsic-modules)
 
 ### Fortran arrays
- - [Array sections](array-section)
+ - [Array sections](array-sections)
  - [Array syntax](array-syntax)
  - [Dynamic arrays and intrinsinc functions](dynamic-arrays)
  - [Bonus: passing arrays to procedures](arrays-procedures)
