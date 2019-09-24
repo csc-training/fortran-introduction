@@ -9,7 +9,6 @@ program formatdemo
   open(unit=11, file='array.txt', iostat=io_stat)
   if (io_stat /= 0) call abort()
   ! TODO: add here a formatted write with sensible integer format
-  write(11,'(*(I2))') values
   close(11)
 
   ! TODO: open file in unformatted form

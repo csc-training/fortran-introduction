@@ -8,6 +8,7 @@ program formatdemo
 
   open(unit=11, file='array.txt', iostat=io_stat)
   if (io_stat /= 0) call abort()
+  write(11,'(*(I2))') values
   close(11)
 
   open(unit=11, file='array.bin', form='unformatted', iostat=io_stat)
