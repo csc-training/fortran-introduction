@@ -26,6 +26,7 @@ Computing". The course is part of the PRACE Training activity at CSC
  - [Bonus: passing arrays to procedures](arrays-procedures)
 
 ### Input and output
+ - [IO formatting and simple file IO](io-formatting)
  - [Formatted and unformatted writing](binary-io)
  - [Reading data from a file](io)
 
