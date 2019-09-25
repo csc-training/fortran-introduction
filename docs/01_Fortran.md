@@ -186,7 +186,7 @@ a /= b  ! or (f77) a.ne.b -- not equal to
 a > b   ! or (f77) a.gt.b -- greater than
 a >= b  ! or (f77) a.ge.b -- greater than or equal to
 ! Logical operators
-a.not.b ! logical negation precedence: first
+.not.b ! logical negation precedence: first
 a.and.b ! logical conjunction precedence: second
 a.or.b  ! logical inclusive disjunction precedence: third
 ```
