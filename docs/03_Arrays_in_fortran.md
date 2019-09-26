@@ -11,7 +11,7 @@
 
 - Fortran is a very versatile programming language for handling arrays
     - especially multi-dimensional arrays
-- Arrays refer to a data type (built-in or derived), but also have one
+- Arrays refer to a data type (built-in or derived), and have one
   or more dimensions specified in the variable declaration
     - Fortran supports up to 15 dimensions
 
