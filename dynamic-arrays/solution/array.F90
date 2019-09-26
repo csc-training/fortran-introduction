@@ -15,7 +15,7 @@ program array
   ! TODO: Fill A with random numbers
   call random_number(A)
 
-  do i = 1, ny
+  do i = 1, nx
      write(*,'(*(F5.2))') A(i,:)
   end do
 
