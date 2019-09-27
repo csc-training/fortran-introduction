@@ -43,7 +43,7 @@ end type particletype
 - Declaring a variable with a type 
 
 ``` fortran
-type(particletype) :: proton, water(300)
+type(particletype) :: proton, sodiums(300)
 ```
 
 - Elements are accessed with **`%`** operator 
@@ -70,13 +70,13 @@ write(*,*) proton % charge
 - Data type initialization 
 
 ``` fortran
-water(1) = particletype(0.75, 0.19, 0.0, 1)
-water(2) = particletype(0.0, -0.38, 0.0, 8) 
-water(3) = particletype(-0.75, 0.19, 0.0, 1) 
+sodiums(1) = particletype(0.75, 0.19, 0.0, 1)
+sodiums(2) = particletype(0.0, -0.38, 0.0, 8) 
+sodiums(3) = particletype(-0.75, 0.19, 0.0, 1) 
 ! or elementwise
-water(1) % x = 0.75 
-water(1) % y = 0.19 
-water(1) % z = 0.0
+sodiums(1) % x = 0.75 
+sodiums(1) % y = 0.19 
+sodiums(1) % z = 0.0
 ```
 
 # Nested derived types
