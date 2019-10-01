@@ -562,7 +562,7 @@ program addertest
 
   value1 = 1.0
   value2 = 2.0
-  summed = value1 + value2
+  summed = adder(value1, value2)
   print *, summed
 
 end program addertest
