@@ -6,16 +6,26 @@ LECTURES=01_Fortran.md \
 06_Further_useful_features.md \
 07_Advanced_features.md
 
+TITLE=0_Title.pdf
+
+PRESS=fortran-press.pdf
+HANDOUT=fortran-handout.pdf
+
 SINGULARITY=singularity run ../../slide-template/slidefactory.simg
 
 HTMLS:=$(patsubst %.md,%.html,$(LECTURES))
+PDFS:=$(patsubst %.md,%.pdf,$(LECTURES))
 
-all: $(HTMLS)
+all: $(PDFS)
+	./mess_nup -c $(TITLE) -o $(PRESS) -h $(HANDOUT) -- $(PDFS)
 
 %.html:%.md
 	$(SINGULARITY) $<
 
+%.pdf:%.html
+	./conv2pdf.sh $<
+
 .PHONY: clean
 
 clean:
-	-/bin/rm -f $(HTMLS) *~
+	-/bin/rm -f $(HTMLS) $(PDFS) $(PRESS) $(HANDOUT) *~
