@@ -1,3 +1,8 @@
+---
+theme: csc-ptc-2019
+lang: en
+---
+
 # Advanced features in Fortran{.section}
 
 # Outline
@@ -89,7 +94,6 @@ end function call_c_func
     - By default the Fortran name in lower case
 
 # Mapping of C intrinsic data types
-
 
 - Interoperable mappings for the most commonly used C intrinsic data
   types (note that Fortran does not support unsigned integers)

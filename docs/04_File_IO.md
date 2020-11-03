@@ -1,3 +1,8 @@
+---
+theme: csc-ptc-2019
+lang:  en
+---
+
 # Input/Output {.section}
 
 # Outline

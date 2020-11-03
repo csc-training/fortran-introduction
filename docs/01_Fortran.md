@@ -1,9 +1,11 @@
 ---
-title:  Fortran Programming for Scientific Computing
-author: Prace Training Center / CSC
-date:   September 2019
 lang:   en
+theme:  csc-ptc-2019
 ---
+
+# Fortran Programming for Scientific Computing {.title}
+
+Prace Training Center / CSC, November 2020
 
 # Getting started with Fortran {.section}
 
@@ -110,20 +112,18 @@ end program square_root_example
     - Semicolon (;) is the separator between statements on a single
       line
 
-
 # Variables
 
 - *Variables* must be *declared* at the beginning of the program or
   procedure where they are used
     - They can also be given a value at declaration (not recommended)
-- *Constants* are defined with the PARAMETER attribute – they cannot
+- *Constants* are defined with the `PARAMETER` attribute – they cannot
   be altered after their declaration
     - Value *must* be given at declaration
 - The *intrinsic* data types in Fortran are `integer`, `real`,
-`complex`, `character` and `logical`
+  `complex`, `character` and `logical`
 
 # Variables
-
 
 <div class=column>
 **Numbers** and **logical** 
@@ -132,11 +132,11 @@ integer :: n
 real :: a, b  ! Multiple variables of same type
 complex :: imag_number
 logical :: test0, test1
-real, parameter :: pi=3.14159
+real, parameter :: pi = 3.14159
 
 n = 42
 a = 2.2
-imag_number=(0.1, 1.0)
+imag_number = (0.1, 1.0)
 test0 = .true.
 test1 = .false.
 
@@ -151,7 +151,7 @@ n = b + 3
 ```fortran
 character :: my_char  ! string with length one
 character(len=80) :: my_str
-character(len=*), parameter :: name='james bond'
+character(len=*), parameter :: name = 'james bond'
 
 ! Only first character stored
 my_char = 'too long!'
@@ -223,11 +223,11 @@ vector(-3) = 4.2
 
 ```fortran
 if (condition) then
-! do something
+  ! do something
 else if (condition2) then
-! .. or maybe alternative something else
+  ! .. or maybe alternative something else
 else
-! .. or at least this
+  ! .. or at least this
 end if
 ```
 
@@ -275,7 +275,7 @@ select case (i)
   case (1,4,6,8:10)
     is_prime = .false.
   case default
-    is_prime=test_prime_number(i)
+    is_prime = test_prime_number(i)
 end select
 ```
 </div>
@@ -293,7 +293,7 @@ do {control clause}
 end do
 
 ! where the control clause (optional) is either of the form
-! i=init_value, max_value, increment
+! i = init_value, max_value, increment
 ! or a condition to execute while true
 ! while (condition)
 ```
@@ -302,7 +302,7 @@ end do
 
 ```fortran
  integer :: i, stepsize, numberofpoints 
- integer, parameter :: max_points=100000 
+ integer, parameter :: max_points = 100000
  real :: x_coodinate(max_points), x, totalsum
  
  ! a do-loop with an integer counter (count controlled)
@@ -359,12 +359,12 @@ end if test
 
 
 ```fortran
-...
+!...
 outer: do i=1, 100
-           do j=1, 100
-	          ...
-	          if (condition) cycle outer
-	       end do
+   do j = 1, 100
+      ...
+      if (condition) cycle outer
+   end do
 end do outer
 ```
 </div>

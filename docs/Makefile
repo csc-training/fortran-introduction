@@ -11,7 +11,7 @@ TITLE=0_Title.pdf
 PRESS=fortran-press.pdf
 HANDOUT=fortran-handout.pdf
 
-SINGULARITY=singularity run ../../slide-template/slidefactory.simg
+PANDOC=../../slidefactory/pandoc.sif
 
 HTMLS:=$(patsubst %.md,%.html,$(LECTURES))
 PDFS:=$(patsubst %.md,%.pdf,$(LECTURES))
@@ -20,7 +20,7 @@ all: $(PDFS)
 	./mess_nup -c $(TITLE) -o $(PRESS) -h $(HANDOUT) -- $(PDFS)
 
 %.html:%.md
-	$(SINGULARITY) $<
+	$(PANDOC) $<
 
 %.pdf:%.html
 	./conv2pdf.sh $<
@@ -29,3 +29,5 @@ all: $(PDFS)
 
 clean:
 	-/bin/rm -f $(HTMLS) $(PDFS) $(PRESS) $(HANDOUT) *~
+
+.PRECIOUS: %.html
