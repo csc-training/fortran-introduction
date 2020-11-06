@@ -243,6 +243,8 @@ end function add_one
 
 </div>
 
+# Environment variables {.section}
+
 # Environment variables
 
 - Besides command line arguments, environment variables are a common
@@ -267,6 +269,8 @@ if (stat == 0) write (*,'(a,a)') 'host=', enval(1:len)
 call get_environment_variable('USER',enval,len,stat)
 if (stat == 0) write (*,'(a,a)') 'user=', enval(1:len)
 ```
+
+# Executing commands {.section}
 
 # Executing commands
     

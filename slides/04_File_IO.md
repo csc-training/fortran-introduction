@@ -14,6 +14,7 @@ lang:  en
     - Formatted and unformatted (binary) files
     - Stream I/O
 - Internal I/O
+- Command line input
 
 # Introduction
 
@@ -112,6 +113,8 @@ write(*,fmt='("<i=",i0,", reals=",g0,1x,g0,">")') i,sp,dp
     - **`len(string)`** - length of a string
     - **`index(string, substring)`** - returns the starting position of a
       substring within a string
+
+# File I/O {.section}
 
 # Opening and closing files: basic concepts
 
@@ -309,6 +312,8 @@ write(s2,'(a,i0)') '# of jobs completed = ', &
      & njobs
 ```
 </div>
+
+# Command line input {.section}
 
 # Command line input
 

@@ -112,6 +112,8 @@ end program square_root_example
     - Semicolon (;) is the separator between statements on a single
       line
 
+# Variables and operators {.section}
+
 # Variables
 
 - *Variables* must be *declared* at the beginning of the program or
@@ -400,6 +402,8 @@ naloop:DO na2 = na + 1,nat2
 END DO naloop
 ```
 </small>
+
+# Procedures {.section}
 
 # Procedures
 

@@ -148,6 +148,8 @@ subroutine calculate(m, n)
 end subroutine calculate
 ```
 
+# Array intrinsic functions {.section}
+
 # Array intrinsic functions
 
 - Built-in functions can apply various operations on a whole array,
