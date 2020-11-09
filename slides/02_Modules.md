@@ -3,7 +3,7 @@ theme: csc-ptc-2019
 lang:  en
 ---
 
-# Modules and scoping{.section}
+# Modules and scoping {.section}
 
 # Outline
 
@@ -13,7 +13,8 @@ lang:  en
 
 # Modular programming
 
-- By now, we have implemented the whole application in a single file
+- By now, we have implemented the whole application in a single
+  program block
 - Larger applications should be divided into small, minimally
   dependent *modules*
     - Aim is to build complex behavior from simple self-contained
@@ -23,7 +24,7 @@ lang:  en
 
 # Fortran modules
 
-- Module can contain procedures, variables, constants and data
+- A Fortran module can contain procedures, variables and data
   structure definitions
 - Fortran modules enable
     - Hiding *implementation details*
@@ -70,48 +71,9 @@ module testmod
 ```
 </div>
 
-# Building modules
 
-- Each source file needs to be compiled separately
+# Module procedures {.section}
 
-```console
-$ gfortran -c mymod.f90
-$ gfortran -c myprog.f90
-```
-- When compiling the module, a `.mod` is produced for each module
-  defined in `mymod.f90`.
-- When compiling the main program compiler aborts with error if `.mod`
-  is not found for each module **use**d
-- In order to produce executable, the object files of module and main
-  program need to be linked
-
-```console
-$ gfortran -o myexe mymod.o myprog.o
-```
-
-# Building modules
-
-- Normally **make** (or similar build system) is utilized when working
-  with multiple source files
-
-```console
-$ make
-gfortran -c mymod.f90
-gfortran -c myprog.f90
-gfortran -o myexe mymod.o myprog.o
-```
-
-- By defining dependencies between program units only those units that
-  are affected by changes need to be compiled
-
-```console
-$ emacs myprog.f90
-$ make
-gfortran -c myprog.f90
-gfortran -o myexe mymod.o myprog.o
-```
-
-# Module procedures{.section}
 # Defining procedures in modules
 
 - In most cases, procedures should be defined in modules
@@ -223,10 +185,47 @@ Use as:
 `res = func(act_arg1, act_arg2,...)`
 </div>
 
+# Two formats for function definitions
+
+- There are two ways to define a function
+
+<div class="column">
+
+**Either**
+
+```fortran
+real function real_func(arg1, arg2)
+  real :: arg1, arg2
+  real_func = arg1 + arg2
+end function real_func
+```
+
+Function name is valid variable name within the function scope and
+it is used to determine the return value of the function.
+
+</div>
+
+<div class="column">
+
+**Or**
+
+```fortran
+function real_func(arg1, arg2) result(val)
+  real :: arg1, arg2, val
+  val = arg1 + arg2
+end function real_func
+```
+
+Variable to be used as function return value is give with `result`.
+Variable has to be declared in the variable declaration section and
+the return type is same as variable type.
+
+</div>
+
 
 # Procedure arguments
 
-- Types of arguments in procedure defition (dummy arguments)
+- Types of arguments in procedure definition (dummy arguments)
   need to be declared
     - When calling the procedure, the types of actual arguments need
       to match the definition.
@@ -391,6 +390,50 @@ module visibility
 
 end module
 ```
+
+# Building modules {.section}
+
+# Building modules
+
+- Each source file needs to be compiled separately
+
+```console
+$ gfortran -c mymod.f90
+$ gfortran -c myprog.f90
+```
+- When compiling the module, a `.mod` is produced for each module
+  defined in `mymod.f90`.
+- When compiling the main program compiler aborts with error if `.mod`
+  is not found for each module **use**d
+- In order to produce executable, the object files of module and main
+  program need to be linked
+
+```console
+$ gfortran -o myexe mymod.o myprog.o
+```
+
+# Building modules
+
+- Normally **make** (or similar build system) is utilized when working
+  with multiple source files
+
+```console
+$ make
+gfortran -c mymod.f90
+gfortran -c myprog.f90
+gfortran -o myexe mymod.o myprog.o
+```
+
+- By defining dependencies between program units only those units that
+  are affected by changes need to be compiled
+
+```console
+$ emacs myprog.f90
+$ make
+gfortran -c myprog.f90
+gfortran -o myexe mymod.o myprog.o
+```
+
 
 # Intrinsic modules{.section}
 

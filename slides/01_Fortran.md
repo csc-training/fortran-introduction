@@ -24,17 +24,6 @@ Prace Training Center / CSC, November 2020
 
 # Fortran as a language {.section}
 
-# Why learn Fortran?
-
-- Well suited for **numerical computations**
-    - Likely over 50% of scientific applications are written in
-      Fortran
-- **Fast** code (compilers can optimize well)
-- Handy **array data types**
-- **Clarity** of code
-- **Portability** of code
-- Optimized **numerical libraries** available
-
 # Short history of Fortran
 
 - John W. Backus et al (1954): The IBM Mathematical **For**mula
