@@ -7,8 +7,8 @@ lang:  en
 
 # Outline
 
+- Procedures
 - Fortran modules
-- Module procedures
 - Data scoping
 
 # Modular programming
@@ -22,130 +22,7 @@ lang:  en
     - Modules can be tested and debugged separately
     - Modules enable easier re-use of code
 
-# Fortran modules
-
-- A Fortran module can contain procedures, variables and data
-  structure definitions
-- Fortran modules enable
-    - Hiding *implementation details*
-    - *Grouping* routines and data structures
-    - Defining *generic procedures* and custom operators
-
-# Module definition and usage
-
-- Module is defined with the `module` keyword and used from main
-  program or other modules with the `use` keyword
-- Depending on the complexity of module, one file can contain a single
-  or multiple module definitions
-    - Only related modules should be grouped into the same file
-
-# A simple module example
-
-<div class="column">
-**Module definition**
-```fortran
-module geometry
-  implicit none
-
-  real, parameter :: pi = 3.14
-end module geometry
-```
-</div>
-<div class="column">
-**Usage**
-```{.fortran emphasize=2-2,6:17-6:18}
-program testprog
-  use geometry
-  implicit none
-
-  real :: y
-  y = sin(1.2 * pi)
-end program testprog
-```
-```{.fortran emphasize=2-2,5:32-5:33}
-module testmod
-  use geometry
-  implicit none
-
-  real, parameter :: twopi = 2*pi
-```
-</div>
-
-
-# Module procedures {.section}
-
-# Defining procedures in modules
-
-- In most cases, procedures should be defined in modules
-- Procedures are defined after `contains` keyword
-
-<div class="column">
-**Function** definition in module
-```{.fortran emphasize=5:1-5:8,6:8-6:20}
-module geometry
-  implicit none
-  real, parameter :: pi = 3.14
-
-contains
-  real function dist(x, y)
-    implicit none
-    real :: x, y
-    dist = sqrt(x**2 + y**2)
-  end function dist
-
-end module geometry
-```
-</div>
-<div class="column">
-Usage
-```{.fortran emphasize=2:3-2:14,6:7-6:10}
-program testprog
-  use geometry
-  implicit none
-
-  real :: d
-  d = dist(2.0, 3.4)
-
-end program testprog
-```
-</div>
-	
-# Defining procedures in modules
-
-- In most cases, procedures should be defined in modules
-- Procedures are defined after `contains` keyword
-
-<div class="column">
-**Subroutine** definition in module
-```{.fortran emphasize=5:1-5:8,6:3-6:17}
-module geometry
-  implicit none
-  real, parameter :: pi = 3.14
-
-contains
-  subroutine dist(x, y, d)
-    implicit none
-    real :: x, y, d
-    d = sqrt(x**2 + y**2)
-  end subroutine dist
-
-end module geometry
-```
-</div>
-<div class="column">
-Usage
-```{.fortran emphasize=2:3-2:14,6:3-6:11}
-program testprog
-  use geometry
-  implicit none
-
-  real :: d
-  call dist(2.0, 3.4, d)
-
-end program testprog
-```
-</div>
-
+# Procedures {.section}
 
 # Procedure definitions
 
@@ -222,7 +99,6 @@ the return type is same as variable type.
 
 </div>
 
-
 # Procedure arguments
 
 - Types of arguments in procedure definition (dummy arguments)
@@ -235,7 +111,7 @@ the return type is same as variable type.
       called procedure
     - Any change to the value of an argument changes the value at the
       calling program
-          - Procedures can have *side-effects*
+        - Procedures can have *side-effects*
     - The *intent* attribute can be used to specify how argument is
       used
   
@@ -277,7 +153,132 @@ r = dist(x1, y1) + dist(x2, y2)
     - Use subroutines for performing operation that changes some of the
       inputs
 
+# Modules {.section}
+
+# Fortran modules
+
+- A Fortran module can contain procedures, variables and data
+  structure definitions
+- Fortran modules enable
+    - Hiding *implementation details*
+    - *Grouping* routines and data structures
+    - Defining *generic procedures* and custom operators
+
+# Module definition and usage
+
+- Module is defined with the `module` keyword and used from main
+  program or other modules with the `use` keyword
+- Depending on the complexity of module, one file can contain a single
+  or multiple module definitions
+    - Only related modules should be grouped into the same file
+
+# A simple module example
+
+<div class="column">
+**Module definition**
+```fortran
+module geometry
+  implicit none
+
+  real, parameter :: pi = 3.14
+end module geometry
+```
+</div>
+<div class="column">
+**Usage**
+```{.fortran emphasize=2-2,6:17-6:18}
+program testprog
+  use geometry
+  implicit none
+
+  real :: y
+  y = sin(1.2 * pi)
+end program testprog
+```
+```{.fortran emphasize=2-2,5:32-5:33}
+module testmod
+  use geometry
+  implicit none
+
+  real, parameter :: twopi = 2*pi
+```
+</div>
+
+# Defining procedures in modules (function)
+
+- In most cases, procedures should be defined in modules
+- Procedures are defined after `contains` keyword
+
+<div class="column">
+**Function** definition in module
+```{.fortran emphasize=5:1-5:8,6:8-6:20}
+module geometry
+  implicit none
+  real, parameter :: pi = 3.14
+
+contains
+  real function dist(x, y)
+    implicit none
+    real :: x, y
+    dist = sqrt(x**2 + y**2)
+  end function dist
+
+end module geometry
+```
+</div>
+<div class="column">
+Usage
+```{.fortran emphasize=2:3-2:14,6:7-6:10}
+program testprog
+  use geometry
+  implicit none
+
+  real :: d
+  d = dist(2.0, 3.4)
+
+end program testprog
+```
+</div>
+
+# Defining procedures in modules (subroutine)
+
+- In most cases, procedures should be defined in modules
+- Procedures are defined after `contains` keyword
+
+<div class="column">
+**Subroutine** definition in module
+```{.fortran emphasize=5:1-5:8,6:3-6:17}
+module geometry
+  implicit none
+  real, parameter :: pi = 3.14
+
+contains
+  subroutine dist(x, y, d)
+    implicit none
+    real :: x, y, d
+    d = sqrt(x**2 + y**2)
+  end subroutine dist
+
+end module geometry
+```
+</div>
+<div class="column">
+Usage
+```{.fortran emphasize=2:3-2:14,6:3-6:11}
+program testprog
+  use geometry
+  implicit none
+
+  real :: d
+  call dist(2.0, 3.4, d)
+
+end program testprog
+```
+</div>
+
+
 # Scoping{.section}
+
 # Scoping of variables
 
 - Scope is the region of the program where a particular variable is
@@ -318,7 +319,10 @@ subroutine no_save(x)
   i = 0
   i = i + 1
 ```
+- variable **i** starts always from 0 and gets value 1
+
 </div>
+
 <div class="column">
 ```fortran
 subroutine implicit_save(x)
@@ -326,11 +330,10 @@ subroutine implicit_save(x)
   integer :: i = 0
   i = i + 1
 ```
+- variable **i** gets values 1, 2, 3, … in each successive call
+
 </div>
 
-- In `no_save` variable **i** starts always from 0 and gets value 1
-- In `implicit_save` variable **i** gets values 1, 2, 3, … in each successive
-  call
 
 # Variables in modules
 
@@ -374,22 +377,55 @@ program myprog
     default)
     - **private** will hide the objects from other program units
 
-
 ``` fortran
 module visibility
-  real :: x,y
-  private :: x
-  public :: y  ! public declaration is not in principle needed but can improve readability
-  real, private :: z ! Visibility can be declared together with type
+   real :: x,y
+   private :: x
+   public :: y ! public declaration is not in principle needed but can improve readability
+   real, private :: z ! Visibility can be declared together with type
 
-  private :: foo ! foo can be called only inside this module
+   private :: foo ! foo can be called only inside this module
 
-  contains
-    subroutine foo()
+ contains
+
+   subroutine foo()
       ...
-
-end module
 ```
+
+# Protected module variables
+
+- Module variables can also be **protected**
+    - Values of protected variables can be accessed is use-associated
+      scope, but modifications are prohibited
+
+<div class="column">
+```fortran
+module protect_demo
+   implicit none
+   integer, protected :: my_value
+
+ contains
+
+   subroutine modify(val)
+     integer :: val
+     my_value = val  ! This is ok
+   end subroutine modify
+end module protect_demo
+```
+</div>
+<div class="column">
+```fortran
+program demo
+  use protect_demo
+  implicit none
+
+  call modify(42)
+  write(*,*) 'my_value:', my_value
+  my_value = 43  ! This fails
+  ...
+```
+</div>
+
 
 # Building modules {.section}
 
@@ -434,21 +470,19 @@ gfortran -c myprog.f90
 gfortran -o myexe mymod.o myprog.o
 ```
 
-
 # Intrinsic modules{.section}
 
 # Intrinsic modules
 
 - Fortran standard defines several **intrinsic** modules that are part
   of the Fortran language
-      - Most commonly used are `iso_fortran_env` and `iso_c_binding`
+    - Most commonly used are `iso_fortran_env` and `iso_c_binding`
 - To make sure that the standard defined version is loaded, you can
   specify the `intrinsic` on `use` clause:
 
 ``` fortran
 use, intrinsic :: iso_fortran_env
 ```
-
 
 # Precision of built-in numeric types
 
@@ -498,7 +532,7 @@ integer(kind=ip) :: short_integer_number
 use, intrinsic :: iso_fortran_env, only : real64
 real(kind=real64) :: value32, value64
 value32 = 0.1
-value64 = 0.1_real64 ! you may see 3d0 in old codes
+value64 = 0.1_real64 ! you may see 0.1D0 in old codes
 write(*,'(G0)') value32
 write(*,'(G0)') value64
 ! Result:
@@ -536,13 +570,13 @@ $ ./test
 
 ``` fortran
 subroutine mySubroutine
-  ...
-  call myInternalSubroutine
-  ...
-  contains
-    subroutine myInternalSubroutine
-      ...
-    end subroutine myInternalSubroutine
+   ...
+   call myInternalSubroutine
+   ...
+ contains
+   subroutine myInternalSubroutine
+     ...
+   end subroutine myInternalSubroutine
 end subroutine mySubroutine
 ```
 
