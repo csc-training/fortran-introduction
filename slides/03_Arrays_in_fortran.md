@@ -15,7 +15,7 @@ lang: en
 # Introduction to Fortran arrays
 
 - Fortran is a very versatile programming language for handling arrays
-    - especially multi-dimensional arrays
+    - Especially multi-dimensional arrays
 - Arrays refer to a data type (built-in or derived), and have one
   or more dimensions specified in the variable declaration
     - Fortran supports up to 15 dimensions
@@ -65,25 +65,25 @@ Array syntax allows for less explicit do loops
 <div class="column">
 ```fortran
 integer :: m = 100, n = 200
-real :: a(m,n) , x(n), y(m)
-integer :: i , j
+real :: a(m,n), x(n), y(m)
+integer :: i, j
 y = 0.0
-outer_loop : do j = 1, n
-   inner_loop : do i = 1, m
+do j = 1, n
+   do i = 1, m
       y(i) = y(i) + a(i,j) * x(j)
-   end do inner_loop
-end do outer_loop
+   end do
+end do
 ```
 </div>
 <div class="column">
 ```fortran
 integer :: m = 100, n = 200
-real :: a(m,n) , x(n), y(m)
+real :: a(m,n), x(n), y(m)
 integer :: j
 y = 0.0
-outer_loop : do j = 1, n
+do j = 1, n
    y(:) = y(:) + a(:,j) * x(j)
-end do outer_loop
+end do
 ```
 </div>
 
@@ -113,7 +113,7 @@ lhs(1:2, 0:9) = rhs(-2:0, 20:29)
   declared at compile time
 - If the sizes of an array depends on the input to program, its memory
   should be *allocated* at runtime
-    - memory allocation becomes *dynamic*
+    - Memory allocation becomes *dynamic*
 
 # Dynamic memory allocation
 
@@ -123,11 +123,12 @@ integer, allocatable :: idx(:)       ! The shapes (but not sizes) of the arrays 
 real, allocatable :: mat(:,:)        ! known upon declaration
 ...
 read (*,*) m, n
-allocate (idx(0:m–1)) ! You can specify the start index, by default indexing starts from 1
-allocate (mat(m,n), stat=alloc_stat) ! optional error code to check if allocation was succesful
+allocate(idx(0:m–1)) ! You can specify the start index, by default indexing starts from 1
+allocate(mat(m,n), stat=alloc_stat) ! optional error code to check if allocation
+                                     ! was succesful
 if (alloc_stat /= 0) stop
 ...
-deallocate (mat) ! Destroys the allocation (and the contents of the array)
+deallocate(mat) ! Destroys the allocation (and the contents of the array)
 ```
 
 # Memory allocation with automatic arrays
@@ -171,19 +172,19 @@ end subroutine calculate
 
 # Array intrinsic functions
 
-- **`any(l_array [, dim])`** returns a scalar value of **`.true.`** if
+- **`any(l_array[,dim])`** returns a scalar value of **`.true.`** if
   any value in logical **`l_array`** is **`.true.`**
-- **`all(l_array [, dim])`** returns a scalar value of **`.true.`** if
+- **`all(l_array[,dim])`** returns a scalar value of **`.true.`** if
   all values in logical **`l_array`** are **`.true.`**
-- **`minval/maxval (array [,dim] [, mask])`** return the
+- **`minval/maxval(array[,dim][,mask])`** return the
   minimum/maximum value in a given array
-- **`minloc/maxloc (array [, mask])`** return a vector of location(s)
+- **`minloc/maxloc(array[,mask])`** return a vector of location(s)
   where the minimum/maximum value(s) are found
 
 # Array intrinsic functions: example
 
 ```fortran
-integer :: j integer, parameter :: m = 10, n = 20
+integer :: j; integer, parameter :: m = 10, n = 20
 real :: x(m,n), v(n)
 call random_number(x)
 
@@ -191,7 +192,7 @@ print *, size(x), size(v) ! prints m * n, n
 print *, shape(x)         ! prints m, n
 print *, size(shape(x))   ! prints 2
 print *, count(x >= 0, dim=2)  ! the result is a vector
-print *, sum(x, mask=x < 0.5)  ! performs sum of elements smaller than 0.5
+print *, sum(x, mask=(x < 0.5))  ! performs sum of elements smaller than 0.5
 
 v(1:n) = [ (j, j=1,n) ]
 print *, any(v > -1 .and. v < 1)
@@ -215,11 +216,13 @@ v = reshape(a, shape(v))
 
 # Array intrinsic functions
 
-Some array functions that manipulate vectors/matrices effectively:
+Fortran also includes few basic linear algebra routines
 
 - **`dot_product(v,w)`** returns a dot product of two vectors
 - **`matmul(a,b)`** returns matrix multiply of two matrices
 - **`transpose(a)`** returns transposed of the input matrix
+
+Performance depends on the compiler and environment
 
 # Array intrinsic functions
 
@@ -233,7 +236,7 @@ Some array functions that manipulate vectors/matrices effectively:
 integer :: j, ix(5)
 ix(:) = (/ (j, j=1,size(ix)) /)
 where (ix == 0) ix = -9999
-where (ix< 0)
+where (ix < 0)
   ix = -ix
 elsewhere
   ix = 0
@@ -251,11 +254,11 @@ forall (j=2:100) a(j,j-1) = c(j)
 ```
 </div>
 
-# Pointers{.section}
+# Pointers {.section}
 
 # Pointers to arrays
 
-- The **`pointer`** attribute enables to create array (or scalar)
+- The **`pointer`** attribute enables creation of array (or scalar)
   *aliasing variables*
 - Pointer variables are usually employed to *refer* to another array
   or array section
@@ -279,10 +282,9 @@ integer, target, allocatable :: y(:)
 ...
 p => x           ! The pointer array can point to a whole array 
 p => x(2:300:5)  ! or a part of it, no need to reallocate
-print * p(1)  ! p(1) points to x(2)
-p(2) = 0   ! This would change the value of x(3) too
-
-p => y   ! Now p points to another array y (which needs to be allocated)
+print *, p(1)    ! p(1) points to x(2)
+p(2) = 0   ! This would change the value of x(7) too
+p => y     ! Now p points to another array y (which needs to be allocated)
 
 nullify(p) ! Now p points to nothing
 ```
@@ -295,22 +297,24 @@ real, pointer :: p_mat(:,:) => null()
 real, target :: mat(100,200)
 
 p_mat => mat
-if ( associated (p_mat) ) &
-print *, 'points to something'
-
+if (associated(p_mat)) then
+  print *, 'points to something'
+end if
 nullify(p_mat)
-if (.not. associated (p_mat) ) &
-print *, 'points to nothing'
+if (.not.associated(p_mat)) then
+  print *, 'points to nothing'
+end if
 ```
 </div>
 <div class="column">
 **associated** function can be used to check whether a pointer is
 associated with a target
 
-- Returns **`.true.`** if associated with a target, **`.false.`** if
-  not
+- Returns **`.true.`** if associated with a target, **`.false.`**
+  if not
 - For an uninitialized pointer variables, the return value is
-  undefined </div>
+  undefined
+</div>
 
 # Arrays and procedures
 
@@ -318,7 +322,7 @@ associated with a target
   always use **assumed-shape arrays** as dummy argument
   
 ```fortran
-subroutine demo(array_a, array_b))
+subroutine demo(array_a, array_b)
   real, dimension(:,:), intent(in) :: array_a
   integer, intent(in) :: array_b(:)
 ```
