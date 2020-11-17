@@ -30,18 +30,16 @@ write(*,*) item1, item2, item3, ...
 ```
 - Here the items are the variables whose values are to be written and
   the two asterisks denote the *unit* and *formatting*
-      - Default unit is the terminal (stdout)
-      - Default formatting depends on the compiler
+    - Default unit is the terminal (stdout)
+    - Default formatting depends on the compiler
 
 # Input/Output formatting
 
-- To prettify output and to make it human readable, use format
+- To prettify output and to make it more readable, use format
   descriptors in connection with the write statement
 - Although less often used nowadays, it can also be used with read to
   input data at fixed line positions and using predefined field
   lengths
-- Used through format statements, character variable or within
-  read/write fmt keyword
 
 # Output formatting
 
@@ -57,7 +55,7 @@ write(*,*) item1, item2, item3, ...
 | exponential forms, | ew.d               | `write(*,'(e12.3)') r`  |
 | auto-scaling)      | gw.d               | `write(*,'(g20.13)') r` |
 | Character          | a, aw              | `write(*,'(a)') c`      |
-| Logical            | lw                 | `write(*,'(l2)') l`     |
+| Logical            | lw                 | `write(*,'(l)') l`     |
 
 </center>
 
@@ -72,7 +70,7 @@ m=minimum number of characters
   parts:
 ```fortran
 complex :: z 
-write (*,'(f6.3,2x,f6.3)') z ! real and imaginary parts
+write (*,'(f4.1,f4.1)') z ! real and imaginary parts
 ```
 - Line break and whitespace:
 ``` fortran
@@ -80,7 +78,7 @@ write(*,'(f6.3,/,f6.3)') x, y ! linebreak between x and y
 write(*,'(i3,2x,f6.3)') i, x  ! 2 spaces between i and x
 ```
 - It is possible that an edit descriptor will be repeated a specified
-    number of times
+  number of times
 ``` fortran
 write(*,'(5i8)') ivec(1:5)
 write(*,'(4(i5,2x,f8.3))') (ivec(j),zvec(j),j=1,4)
@@ -93,6 +91,7 @@ write(*,'(4(i5,2x,f8.3))') (ivec(j),zvec(j),j=1,4)
 
 - Output fields are left justified with all the unnecessary leading blanks
   (and precision for **real** valued variables) removed
+
 ``` fortran
 use iso_fortran_env, only : real32, real64
 integer :: i = 12345
@@ -100,13 +99,13 @@ real (kind=real32) :: sp = 1.23_real32
 real (kind=real64) :: dp = 1.234567890_real64
 write(*,fmt='("<i=",i0,", reals=",g0,1x,g0,">")') i,sp,dp
 ```
+
 - Output is **`<i=12345, reals=1.230000 1.234567890000000>`**
 
 # Handling character strings
 
 - Fortran provides several intrinsic functions for handling character
   strings, such as
-
     - **`trim(string)`** - removes blank spaces from the end of string
     - **`adjustl(string)/adjustr(string)`** - moves blank spaces from the
       beginning/end of the string to the end/beginning of it
@@ -143,15 +142,15 @@ close(unit=10, status='keep')
 # Opening and closing a file
 
 - The first parameter is the unit number
-- The keyword unit= can be omitted
+    - The keyword **`unit=`** can be omitted
 - The unit numbers 0, 5 and 6 are predefined
-    - 0 is output for standard (system) error messages
-    - 5 is for standard (user) input
-    - 6 is for standard (user) output
+    - **0** is output for standard (system) error messages
+    - **5** is for standard (user) input
+    - **6** is for standard (user) output
     - These units are opened by default and should not be re-opened
       nor closed by the user
 - If the file name is omitted in the OPEN, the file name will based on
-  unit number, e.g. ’fort.12’ for `unit=12`
+  unit number, e.g. ’fort.12’ for **`unit=12`**
 
 # File opening options
 
@@ -182,8 +181,8 @@ close(unit=10, status='keep')
     - various file attributes
 - The syntax has two forms, one based on file name, the other for unit
   number
-    -  **`inquire(file='name', options ...)`** or
-    -  **`inquire(unit=iu, options ...)`**
+    - **`inquire(file='name', options ...)`** or
+    - **`inquire(unit=iu, options ...)`**
 
 # File opening: file properties
 
@@ -275,11 +274,13 @@ read(10) string
   implements a C-like approach
 - It is recommended to use stream I/O
 - Create a stream (binary) file
+
 ``` fortran
 real :: dbheader(20), dbdata(300)
 open(10,file='my_database.dat', access='stream')
 write(10) dbheader
 ```
+
 - Reading similarly
 
 # Internal I/O
@@ -292,7 +293,7 @@ write(10) dbheader
 - Fortran internal I/O with `read` and `write` becomes now handy:
   instead of unit number one provides character array as first
   argument
-     - Actual files are not involved at all
+    - Actual files are not involved at all
 
 </div>
 
@@ -304,7 +305,7 @@ character(len=60) :: s2
 integer :: njobs, istep
 
 ! extract a number from character string 
-s1 = 'time step\# 10'
+s1 = 'time step# 10'
 read(s1,fmt='(10x,i3)') istep
 ! write data to a character string
 njobs = 2014
@@ -322,7 +323,7 @@ write(s2,'(a,i0)') '# of jobs completed = ', &
     - Instead of using a parser, reading from an input file etc.
 - Fortran 2003 provides a way for this
     - **`command_argument_count()`**
-    - **`get_command_argument(integer i, character arg(i))`**
+    - **`get_command_argument()`**
 
 
 # Command line input
@@ -346,7 +347,7 @@ subroutine read_command_line(height, width)
     call abort()
   end if
   do i = 1, 2
-    call get_command_argument(i,args(i))
+    call get_command_argument(i, args(i))
     args(i) = trim(adjustl(args(i)))
   end do
   read(args(1),*) height
