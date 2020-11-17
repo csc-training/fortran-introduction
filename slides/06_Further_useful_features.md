@@ -28,21 +28,21 @@ lang:  en
 
 ```fortran
 module swapmod
-  implicit none
-  interface swap
-     module procedure swap_real, swap_char
-  end interface swap
-contains
-  subroutine swap_real(a, b)
-    real, intent(inout) :: a, b
-    real :: temp
-    temp = a; a = b; b = temp
-  end subroutine swap_real
-  subroutine swap_char(a, b)
-    character, intent(inout) :: a, b
-    character :: temp
-    temp = a; a = b; b = temp
-  end subroutine swap_char
+   implicit none
+   interface swap
+      module procedure swap_real, swap_char
+   end interface swap
+ contains
+   subroutine swap_real(a, b)
+     real, intent(inout) :: a, b
+     real :: temp
+     temp = a; a = b; b = temp
+   end subroutine swap_real
+   subroutine swap_char(a, b)
+     character, intent(inout) :: a, b
+     character :: temp
+     temp = a; a = b; b = temp
+   end subroutine swap_char
 end module swapmod
 ```
 
@@ -101,22 +101,22 @@ end function
 
 ``` fortran
 module operator_demo
-  implicit none
-  type pair
-     real :: a, b
-  end type pair
-  interface operator (<)
-     module procedure is_smaller
-  end interface operator (<)
-contains
-  logical function is_smaller(x, y)
-    type(pair), intent(inout) :: x, y
-    if (x%a < y%a .and. x%b < y%b) then
-       is_smaller = .true.
-    else
-       is_smaller = .false.
-    end if
-  end subroutine
+   implicit none
+   type pair
+      real :: a, b
+   end type pair
+   interface operator (<)
+      module procedure is_smaller
+   end interface operator (<)
+ contains
+   logical function is_smaller(x, y)
+     type(pair), intent(inout) :: x, y
+     if (x%a < y%a .and. x%b < y%b) then
+        is_smaller = .true.
+     else
+        is_smaller = .false.
+     end if
+   end subroutine
 end module operator_demo
 ```
 
@@ -148,7 +148,7 @@ end program switch
 
 ```fortran
 module test
-contains
+ contains
   function apply(f, x) result(y)
     procedure(add_one) :: f
     integer, intent(in) :: x
@@ -161,6 +161,11 @@ contains
     y = x + 1
   end function add_one
 end module test
+
+program test
+  use test
+  print *, apply(add_one, 10)
+end program test
 ```
 
 </div>
@@ -259,14 +264,14 @@ end function add_one
 
 ``` fortran
 character(len=256) :: enval
-integer:: len, stat
+integer:: length, stat
 
 ! extract hostname
-call get_environment_variable('HOSTNAME',enval,len,stat)
+call get_environment_variable('HOSTNAME', enval, length, stat)
 if (stat == 0) write (*,'(a,a)') 'host=', enval(1:len)
 
 ! extract user
-call get_environment_variable('USER',enval,len,stat)
+call get_environment_variable('USER', enval, length, stat)
 if (stat == 0) write (*,'(a,a)') 'user=', enval(1:len)
 ```
 
@@ -274,7 +279,7 @@ if (stat == 0) write (*,'(a,a)') 'user=', enval(1:len)
 
 # Executing commands
     
-- Invoking external programs from within a program would be useful
+- Invoking external programs from within a program may be useful
   occasionally
     - No source nor library API available for a useful program
     - Perl/Python/etc parsing scripts
