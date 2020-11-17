@@ -153,8 +153,7 @@ end function call_c_func
 - A Partitioned Global Address Space (PGAS) paradigm
     - Parallelism implemented over “distributed shared memory”
 - Integrated into Fortran 2008 standard
-    - Compiler support is still incomplete (Cray: excellent, Intel:
-      moderate, GNU: experimental)
+    - Compiler support and especially performance varies
 
 # Summary
 
