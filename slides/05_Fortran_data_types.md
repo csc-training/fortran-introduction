@@ -7,7 +7,11 @@ lang:  en
 
 # Outline
 
-- Derived data types
+- Defining own datatypes
+- Scope of definitions
+- Using datatypes
+	- Nested types
+	- Memory layout
 
 # What is a derived data type?
 
@@ -115,7 +119,7 @@ type point
   real :: x, y, z
 end type point
 
-type(point), allocatable :: points
+type(point), allocatable :: points(:)
 
 allocate(points(N))
 ```
