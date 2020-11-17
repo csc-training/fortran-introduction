@@ -16,7 +16,7 @@ program main
   read(*,*) r, phi
 
   ! convert phi to radians
-  phi = pi * phi / 180
+  phi = pi * phi / 180.0
   call polar2cart(r, phi, x, y)
 
   write(*,*) 'x, y: ', x, y
@@ -27,7 +27,7 @@ program main
 
   call cart2polar(x, y, r, phi)
   ! convert phi to degrees
-  phi = phi * 180 / pi
+  phi = phi * 180.0 / pi
 
   write(*,*) 'r, phi: ', r, phi
 
