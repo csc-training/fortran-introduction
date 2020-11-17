@@ -1,7 +1,7 @@
 program implicit_save
   implicit none
 
-  integer, parameter :: n=1000000
+  integer, parameter :: n = 1000000
   real :: pi
 
   pi = estimate_pi(n)
@@ -30,7 +30,6 @@ contains
        if (x(i)**2 + y(i)**2 < 1.0) then
           count = count + 1
        end if
-
     end do
 
     pi = 4 * real(count) / n
